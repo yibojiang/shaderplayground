@@ -194,9 +194,6 @@ IOKIT_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacO
 //Path to a library.
 OPENGL_LIBRARY:FILEPATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/OpenGL.framework
 
-//The directory containing a CMake configuration file for OpenVDB.
-OpenVDB_DIR:PATH=OpenVDB_DIR-NOTFOUND
-
 //Dependencies for target
 SOIL_LIB_DEPENDS:STATIC=
 
@@ -205,9 +202,6 @@ ShaderPlayground_BINARY_DIR:STATIC=/Users/yjiang6/Documents/Programming/shaderpl
 
 //Value Computed by CMake
 ShaderPlayground_SOURCE_DIR:STATIC=/Users/yjiang6/Documents/Programming/shaderplayground
-
-//The directory containing a CMake configuration file for TBB.
-TBB_DIR:PATH=TBB_DIR-NOTFOUND
 
 //Dependencies for target
 glew_LIB_DEPENDS:STATIC=

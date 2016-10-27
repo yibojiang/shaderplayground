@@ -123,7 +123,7 @@ int main()
     glViewport(0, 0, width, height);
     printf("resolution: %d x %d", width, height);
     
-    shader = new Shader("/Users/yjiang6/Documents/Programming/playground/playground/playground/v.vert", "/Users/yjiang6/Documents/Programming/playground/playground/playground/f.frag");
+    shader = new Shader("v.vert", "f.frag");
     
     // Vertex Buffer Object and Vertex Array Object
     GLuint VBO, VAO;
