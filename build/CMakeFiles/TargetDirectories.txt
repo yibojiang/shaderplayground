@@ -1,0 +1,14 @@
+/Users/yjiang6/Documents/Programming/shaderplayground/build/CMakeFiles/install/local.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/CMakeFiles/install/strip.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/CMakeFiles/install.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/CMakeFiles/list_install_components.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/CMakeFiles/rebuild_cache.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/CMakeFiles/edit_cache.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/install/local.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/playground.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/list_install_components.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/rebuild_cache.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/edit_cache.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/install/strip.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/install.dir
+/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/shader.dir
