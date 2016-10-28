@@ -6,16 +6,21 @@
 //  Copyright © 2016 Yibo Jiang. All rights reserved.
 //
 
+
 #include "Shader.hpp"
 
 #include <unistd.h>
 using namespace std;
+
+
 Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
   string vertexCode;
   string fragmentCode;
   
   char * dir = getcwd(NULL, 0); // Platform-dependent, see reference link below
   printf("Current dir: %s", dir);
+  
+
   
   ifstream vShaderFile(vertexPath, ifstream::in);
   ifstream fShaderFile(fragmentPath, ifstream::in);

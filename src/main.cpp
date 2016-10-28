@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 
 // GLEW
@@ -8,6 +10,8 @@
 #include <GLFW/glfw3.h>
 #include "shader.hpp"
 #include <SOIL.h>
+
+
 
 GLfloat vertices[] = {
     // Positions          // Colors           // Texture Coords
@@ -63,8 +67,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, GL_TRUE);
     
     if(key == GLFW_KEY_ENTER && action == GLFW_PRESS){
-        shader = new Shader("/Users/yjiang6/Documents/Programming/playground/playground/playground/v.vert", "/Users/yjiang6/Documents/Programming/playground/playground/playground/f.frag");
-        printf("recompile shader");
+        shader = new Shader("v.vert", "f.frag");
+        // printf("recompile shader");
     }
     
 }
@@ -171,7 +175,7 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     int texWidth, texHeight;
-    unsigned char* image = SOIL_load_image("/Users/yjiang6/Documents/Programming/playground/playground/playground/wall.jpg", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
+    unsigned char* image = SOIL_load_image("/wall.jpg", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
     
     
 //    The first argument specifies the texture target; setting this to GL_TEXTURE_2D means this operation will generate a texture on the currently bound texture object at the same target (so any textures bound to targets GL_TEXTURE_1D or GL_TEXTURE_3D will not be affected).

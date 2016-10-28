@@ -20,9 +20,9 @@ target_link_libraries(playground shader)
 
 IF(APPLE)
    find_library(COCOA_LIBRARY Cocoa)
-   find_library(OPENGL_LIBRARY OpenGL )
+   find_library(OPENGL_LIBRARY OpenGL)
    find_library(COREVIDEO_LIBRARY CoreVideo)
-   find_library(IOKIT_LIBRARY IOKit )
+   find_library(IOKIT_LIBRARY IOKit)
    MARK_AS_ADVANCED (COCOA_LIBRARY
                      OPENGL_LIBRARY
                      COREVIDEO_LIBRARY
@@ -30,6 +30,22 @@ IF(APPLE)
    SET(EXTRA_LIBS ${COCOA_LIBRARY} ${OPENGL_LIBRARY} ${COREVIDEO_LIBRARY} ${IOKIT_LIBRARY})
 ENDIF (APPLE)
 
-target_link_libraries( playground ${EXTRA_LIBS} )
+target_link_libraries(playground ${EXTRA_LIBS})
 
+add_custom_command(TARGET playground POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                       ${CMAKE_SOURCE_DIR}/build/src/playground ${CMAKE_SOURCE_DIR}/bin/playground)
+
+# This runs the executable "main" each time after it has been (re)built
+# from within the working directory "/bin" - adapt for non-*nices.
+ADD_CUSTOM_COMMAND(TARGET playground
+    POST_BUILD
+    COMMAND playground
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+
+
+
+# file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/playground
+#         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../playground)
 # install(TARGETS playground DESTINATION bin)
