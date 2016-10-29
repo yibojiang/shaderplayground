@@ -38,10 +38,10 @@ add_custom_command(TARGET playground POST_BUILD
 
 # This runs the executable "main" each time after it has been (re)built
 # from within the working directory "/bin" - adapt for non-*nices.
-ADD_CUSTOM_COMMAND(TARGET playground
-    POST_BUILD
-    COMMAND playground
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+# ADD_CUSTOM_COMMAND(TARGET playground
+#     POST_BUILD
+#     COMMAND playground
+#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 
 

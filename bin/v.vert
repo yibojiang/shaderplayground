@@ -9,7 +9,7 @@ uniform float time;
 out vec3 vertexColor;
 out vec3 vertexPosition;
 out vec2 fragCoord;
-
+	
 void main()
 {
     gl_Position = vec4(position, 1.0);

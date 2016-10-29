@@ -1,6 +1,6 @@
 
-
 #include <iostream>
+
 
 // GLEW
 #define GLEW_STATIC
@@ -56,7 +56,20 @@ GLuint indices[] = {
 
 Shader *shader;
 // Window dimensions
+
+
+
+// #include <boost/filesystem/operations.hpp>
+// #include <boost/filesystem/path.hpp>
+
+#include <iostream>
+#include <unistd.h>
+//#include <Python.h>
 const GLuint WIDTH = 800, HEIGHT = 600;
+using namespace std;
+char* fragpath;
+
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -67,26 +80,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, GL_TRUE);
     
     if(key == GLFW_KEY_ENTER && action == GLFW_PRESS){
-        shader = new Shader("v.vert", "f.frag");
-        // printf("recompile shader");
+        shader = new Shader("v.vert", fragpath);
+        cout << "compile shader " << fragpath << endl;
+        
     }
+
+    
     
 }
 
-// #include <boost/filesystem/operations.hpp>
-// #include <boost/filesystem/path.hpp>
-
-#include <iostream>
-#include <unistd.h>
-//#include <Python.h>
-using namespace std;
 // The MAIN function, from here we start the application and run the game loop
 int main(int argc,char** argv)
 {
     cout << "argc = " << argc << endl; 
     for(int i = 0; i < argc; i++) 
         cout << "argv[" << i << "] = " << argv[i] << endl;
-    
+    fragpath = argv[1];
+    cout << "compile shader " << fragpath << endl;
     // chdir("/");
 
     // printf("argument: %d\n",argc);
@@ -140,17 +150,17 @@ int main(int argc,char** argv)
     }
     
     // Define the viewport dimensions
-    int width, height;
-    glfwGetFramebufferSize(window, &width, &height);
-    glViewport(0, 0, width, height);
-    printf("resolution: %d x %d", width, height);
+    // int width, height;
+    // glfwGetFramebufferSize(window, &width, &height);
+    // glViewport(0, 0, width, height);
+    // printf("resolution: %d x %d", width, height);
     
     // chdir(argv[0]);
     // chdir("/");
     chdir("/Users/yjiang6/Documents/Programming/shaderplayground/build/src/playground");
     char * dir = getcwd(NULL, 0); 
     printf("Current dir: %s", dir);
-    shader = new Shader("v.vert", "f.frag");
+    shader = new Shader("v.vert", fragpath);
     
     // Vertex Buffer Object and Vertex Array Object
     GLuint VBO, VAO;
@@ -169,11 +179,6 @@ int main(int argc,char** argv)
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    
-    
-    
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
     // 3. Then set our vertex attributes pointers, and tell GPU how to interpret the vertex data.
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
@@ -198,9 +203,14 @@ int main(int argc,char** argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     
     int texWidth, texHeight;
-    unsigned char* image = SOIL_load_image("/wall.jpg", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
-    
-    
+    // texWidth = 10000;
+    // texHeight = 10000;
+    unsigned char* image = SOIL_load_image("tex11.png", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
+    cout << "loading iamge: " << endl;
+    if (image == NULL)
+        cout << "image is null" << endl; 
+    else
+        cout << "image is loaded" << endl;
 //    The first argument specifies the texture target; setting this to GL_TEXTURE_2D means this operation will generate a texture on the currently bound texture object at the same target (so any textures bound to targets GL_TEXTURE_1D or GL_TEXTURE_3D will not be affected).
 //    The second argument specifies the mipmap level for which we want to create a texture for if you want to set each mipmap level manually, but we'll leave it at the base level which is 0.
 //        The third argument tells OpenGL in what kind of format we want to store the texture. Our image has only RGB values so we'll store the texture with RGB values as well.
@@ -208,12 +218,13 @@ int main(int argc,char** argv)
 //        The next argument should always be 0 (some legacy stuff).
 //        The 7th and 8th argument specify the format and datatype of the source image. We loaded the image with RGB values and stored them as chars (bytes) so we'll pass in the corresponding values.
 //        The last argument is the actual image data.
-    glTexImage1D(GL_TEXTURE_2D, 0, GL_RG8, texWidth, texHeight, GL_RG8, GL_UNSIGNED_BYTE, image);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+    // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, image);
     glGenerateMipmap(GL_TEXTURE_2D);
     
     SOIL_free_image_data(image);
     glBindTexture(GL_TEXTURE_2D, 0);
-    
+
     // Game loop
     while (!glfwWindowShouldClose(window))
     {
@@ -223,7 +234,7 @@ int main(int argc,char** argv)
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        glBindTexture(GL_TEXTURE_2D, texture);
+        
 //        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         shader->Use();
         GLfloat timeValue = glfwGetTime();
@@ -231,14 +242,14 @@ int main(int argc,char** argv)
         glUniform1f(fragTimeLocation, timeValue);
         
         GLuint fragResLocation = glGetUniformLocation(shader->shaderProgram, "iResolution");
-        glUniform2f(fragResLocation, width, height);
+        glUniform2f(fragResLocation, WIDTH, HEIGHT);
 
-//
+        glBindTexture(GL_TEXTURE_2D, texture);
         glBindVertexArray(VAO);
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-//        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 //        glDrawArrays(GL_TRIANGLES, 0, 3);
         glBindVertexArray(0);
         
