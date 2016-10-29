@@ -21,47 +21,13 @@ GLfloat vertices[] = {
     -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,  0.0f, 1.0f  // Top Left 3
 };
 
-GLfloat vertices3[] = {
-    // Positions          // Colors           // Texture Coords
-    0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
-    0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
-    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
-};
-
-GLfloat vertices1[] = {
-    // Positions         // Colors
-    0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // Bottom Right
-    -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // Bottom Left
-    0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // Top
-};
-
-GLfloat vertices2[] = {
-    0.5f,  0.5f, 0.0f,  // Top Right
-    0.5f, -0.5f, 0.0f,  // Bottom Right
-    -0.5f, -0.5f, 0.0f,  // Bottom Left
-    -0.5f,  0.5f, 0.0f   // Top Left
-};
-
-//GLfloat texCoords[] = {
-//    0.0f, 0.0f,
-//    1.0f, 0.0f,
-//    0.5f, 1.0f
-//};
-
 GLuint indices[] = {
     0, 1, 3,
     1, 2, 3
 };
 
 
-Shader *shader;
-// Window dimensions
 
-
-
-// #include <boost/filesystem/operations.hpp>
-// #include <boost/filesystem/path.hpp>
 
 #include <iostream>
 #include <unistd.h>
@@ -69,6 +35,8 @@ Shader *shader;
 //#include <Python.h>
 const GLuint WIDTH = 1280, HEIGHT = 720;
 using namespace std;
+
+Shader *shader;
 char* fragpath;
 double mousexPos, mouseyPos;
 
@@ -117,24 +85,7 @@ int main(int argc,char** argv)
         cout << "argv[" << i << "] = " << argv[i] << endl;
     fragpath = argv[1];
     cout << "compile shader " << fragpath << endl;
-    // chdir("/");
 
-    // printf("argument: %d\n",argc);
-    // fs::path full_path( fs::initial_path<fs::path>() );
-
-    // full_path = fs::system_complete( fs::path( argv[0] ) );
-
-    // std::cout << full_path << std::endl;
-
-    // //Without file name
-    // std::cout << full_path.stem() << std::endl;
-//    Py_SetProgramName(argv[0]);  /* optional but recommended */
-//    Py_Initialize();
-//    PyRun_SimpleString("from time import time,ctime\n"
-//                       "print 'Today is',ctime(time())\n");
-//    Py_Finalize();
-//    return 0;
-    
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     
     // Init GLFW
@@ -338,7 +289,7 @@ int main(int argc,char** argv)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-//        glDrawArrays(GL_TRIANGLES, 0, 3);
+        // glDrawArrays(GL_TRIANGLES, 0, 3);
         glBindVertexArray(0);
         
         // Swap the screen buffers
