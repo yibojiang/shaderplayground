@@ -4,13 +4,17 @@
 in vec3 vertexColor;
 in vec3 vertexPosition;
 in vec2 fragCoord;
-uniform vec4 iMouse;
-uniform sampler2D ourTexture;
+
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+
+uniform vec4 iDate;
 uniform float iGlobalTime;
 uniform vec2 iResolution;
-
+uniform vec4 iMouse;
 out vec4 fragColor;
-
 
 
 const int NUM_STEPS = 8;

@@ -226,7 +226,7 @@ int main(int argc,char** argv)
     int texWidth, texHeight;
     // texWidth = 10000;
     // texHeight = 10000;
-    unsigned char* image = SOIL_load_image("tex11.png", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
+    unsigned char* image = SOIL_load_image("tex16.png", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
     cout << "loading iamge: " << endl;
     if (image == NULL)
         cout << "image is null" << endl; 
