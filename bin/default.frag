@@ -10,8 +10,13 @@ uniform float iGlobalTime;
 uniform vec2 iResolution;
 out vec4 fragColor;
 
-void main()
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
     vec2 uv = fragCoord.xy;
     fragColor = vec4(uv,0.5+0.5*sin(iGlobalTime),1.0);
+}
+
+void main()
+{
+    mainImage( fragColor, fragCoord );
 }

@@ -47,10 +47,9 @@ float firefly(vec2 p, float size) {
 const float pow = 1.0;
 const float flySpeed = 0.1;
 
-
-void main()
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
-   const float duration = 1.0;
+	const float duration = 1.0;
    float t = duration * (1. + sin(3.0 * iGlobalTime ) );
    
    vec2 p = fragCoord.xy;
@@ -103,4 +102,10 @@ void main()
        col += flyCol;
    }
    fragColor = vec4(col, 0.);  
+}
+
+
+void main()
+{
+	mainImage( fragColor, fragCoord );
 }

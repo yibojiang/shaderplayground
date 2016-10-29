@@ -64,13 +64,17 @@ Shader *shader;
 
 #include <iostream>
 #include <unistd.h>
+#include <ctime>
 //#include <Python.h>
 const GLuint WIDTH = 800, HEIGHT = 600;
 using namespace std;
 char* fragpath;
+double mousexPos, mouseyPos;
 
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void mousemove_callback(GLFWwindow* window, double xPos, double yPos);
+void mouse_callback(GLFWwindow *window, int button, int action, int mods);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
     // When a user presses the escape key, we set the WindowShouldClose property to true,
@@ -84,9 +88,24 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         cout << "compile shader " << fragpath << endl;
         
     }
+}
 
-    
-    
+void mousemove_callback(GLFWwindow* window, double xPos, double yPos)
+{
+    mousexPos = xPos;
+    mouseyPos = yPos;
+    // cout << xPos << ", " << yPos << endl;
+
+}
+
+int mousebutton;
+int mouseaction;
+
+void mouse_callback(GLFWwindow *window, int button, int action, int mods)
+{
+    mousebutton = button;
+    mouseaction = action;
+    // cout << button << ", " << action << ", " << mods << endl;
 }
 
 // The MAIN function, from here we start the application and run the game loop
@@ -138,6 +157,8 @@ int main(int argc,char** argv)
     
     // Add Callback to the windows
     glfwSetKeyCallback(window, key_callback);
+    glfwSetCursorPosCallback(window, mousemove_callback);
+    glfwSetMouseButtonCallback(window, mouse_callback);
     
     glfwMakeContextCurrent(window);
     // Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
@@ -243,6 +264,20 @@ int main(int argc,char** argv)
         
         GLuint fragResLocation = glGetUniformLocation(shader->shaderProgram, "iResolution");
         glUniform2f(fragResLocation, WIDTH, HEIGHT);
+
+        GLuint fragMouseLocation = glGetUniformLocation(shader->shaderProgram, "iMouse");
+        glUniform4f(fragMouseLocation, mousexPos, mouseyPos, mousebutton, mouseaction);
+
+        GLuint fragDateLocation = glGetUniformLocation(shader->shaderProgram, "iDate");
+
+        time_t t = time(0);
+        struct tm * now = localtime( & t );
+        
+        struct tm y2k = {0};
+        y2k.tm_hour = 0;   y2k.tm_min = 0; y2k.tm_sec = 0;
+        y2k.tm_year = 100; y2k.tm_mon = 0; y2k.tm_mday = 1;
+        double seconds = difftime(t,mktime(&y2k));
+        glUniform4f(fragDateLocation, now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, seconds);
 
         glBindTexture(GL_TEXTURE_2D, texture);
         glBindVertexArray(VAO);

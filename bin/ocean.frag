@@ -4,10 +4,11 @@
 in vec3 vertexColor;
 in vec3 vertexPosition;
 in vec2 fragCoord;
-
+uniform vec4 iMouse;
 uniform sampler2D ourTexture;
 uniform float iGlobalTime;
 uniform vec2 iResolution;
+
 out vec4 fragColor;
 
 
@@ -164,13 +165,18 @@ float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
     }
     return tmid;
 }
-void main()
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
 
     vec2 uv = fragCoord.xy;
     uv = uv * 2.0 - 1.0;
     uv.x *= iResolution.x / iResolution.y;
-    float time = iGlobalTime * 0.3;
+    float mouse = 0.0;
+    if (iMouse.w > 0.0){
+        mouse = iMouse.x*0.01;
+    }
+    float time = iGlobalTime * 0.3 + mouse;
     
     // ray
     vec3 ang = vec3(sin(time*3.0)*0.1,sin(time)*0.2+0.3,time);
@@ -192,8 +198,13 @@ void main()
                      pow(smoothstep(0.0,-0.05,dir.y),0.3));
     // color = vec3(0.2);
     // post
-    fragColor = vec4(pow(color,vec3(0.75)), 1.0) * vec4(vertexColor, 1.0f);  
-    // frag  Color = texture(ourTexture, fragCoord) * vec4(vertexColor, 1.0f);
+    fragColor = vec4(pow(color,vec3(0.75)), 1.0);  
+    // fragColor = vec4(iMouse.x, 0.0, 0.0, 1.0);
+    // fragColor = texture(ourTexture, fragCoord) * vec4(vertexColor, 1.0f);
 }
 
+void main()
+{
+    mainImage(fragColor, fragCoord);
+}
 

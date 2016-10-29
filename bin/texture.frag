@@ -5,13 +5,24 @@ in vec3 vertexColor;
 in vec3 vertexPosition;
 in vec2 fragCoord;
 
-uniform sampler2D ourTexture;
+uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+
+uniform vec4 iDate;
 uniform float iGlobalTime;
 uniform vec2 iResolution;
+uniform vec4 iMouse;
 out vec4 fragColor;
+
+void mainImage(out vec4 fragColor, in vec2 fragCoord)
+{
+	vec2 uv = fragCoord.xy;
+    fragColor = texture(iChannel0, fragCoord) * vec4(vec3(1.0), 1.0);
+}
 
 void main()
 {
-    vec2 uv = fragCoord.xy;
-    fragColor = texture(ourTexture, fragCoord) * vec4(vec3(1.0), 1.0);
+    mainImage(fragColor, fragCoord);
 }
