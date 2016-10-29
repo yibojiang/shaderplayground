@@ -12,8 +12,11 @@ out vec2 fragCoord;
 
 void main()
 {
+    // gl_Position = vec4(position.x, position.y + sin(time), position.z, 1.0);
     gl_Position = vec4(position, 1.0);
-    vertexColor = color;   
+    vertexColor = color;
+//    vertexPosition = position.xyz + vec3(0.5);
+    
     vertexPosition = position;
     fragCoord = texCoord;
 }

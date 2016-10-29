@@ -17,8 +17,8 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
   string vertexCode;
   string fragmentCode;
   
-  char * dir = getcwd(NULL, 0); // Platform-dependent, see reference link below
-  printf("Current dir: %s", dir);
+  // char * dir = getcwd(NULL, 0); // Platform-dependent, see reference link below
+  
   
 
   
@@ -29,9 +29,6 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
   fShaderFile.exceptions(ifstream::badbit);
   cout<<"opening"<<endl;
   try{
-//    ifstream ifs("C:\\Users\\Imon-Bayazid\\Desktop\\k\\read.txt", ifstream::in);
-//     vShaderFile.open(vertexPath, fstream::in | fstream::out | fstream::app);
-//     fShaderFile.open(fragmentPath, fstream::in | fstream::out | fstream::app);
     stringstream vShaderStream, fShaderStream;
     
     vShaderStream << vShaderFile.rdbuf();
@@ -43,7 +40,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
     vertexCode = vShaderStream.str();
     fragmentCode = fShaderStream.str();
     
-    cout << "out" << vertexCode << fragmentCode << endl;
+    // cout << "out" << vertexCode << fragmentCode << endl;
 
     
   }

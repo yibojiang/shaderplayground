@@ -73,13 +73,31 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     
 }
 
+// #include <boost/filesystem/operations.hpp>
+// #include <boost/filesystem/path.hpp>
 
-
+#include <iostream>
+#include <unistd.h>
 //#include <Python.h>
-
+using namespace std;
 // The MAIN function, from here we start the application and run the game loop
-int main()
+int main(int argc,char** argv)
 {
+    cout << "argc = " << argc << endl; 
+    for(int i = 0; i < argc; i++) 
+        cout << "argv[" << i << "] = " << argv[i] << endl;
+    
+    // chdir("/");
+
+    // printf("argument: %d\n",argc);
+    // fs::path full_path( fs::initial_path<fs::path>() );
+
+    // full_path = fs::system_complete( fs::path( argv[0] ) );
+
+    // std::cout << full_path << std::endl;
+
+    // //Without file name
+    // std::cout << full_path.stem() << std::endl;
 //    Py_SetProgramName(argv[0]);  /* optional but recommended */
 //    Py_Initialize();
 //    PyRun_SimpleString("from time import time,ctime\n"
@@ -127,6 +145,11 @@ int main()
     glViewport(0, 0, width, height);
     printf("resolution: %d x %d", width, height);
     
+    // chdir(argv[0]);
+    // chdir("/");
+    chdir("/Users/yjiang6/Documents/Programming/shaderplayground/build/src/playground");
+    char * dir = getcwd(NULL, 0); 
+    printf("Current dir: %s", dir);
     shader = new Shader("v.vert", "f.frag");
     
     // Vertex Buffer Object and Vertex Array Object

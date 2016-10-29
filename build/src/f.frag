@@ -288,7 +288,7 @@ void main()
                      getSkyColor(dir),
                      getSeaColor(p,n,light,dir,dist),
                      pow(smoothstep(0.0,-0.05,dir.y),0.3));
-    // color = vec3(0.2);
+    color = vec3(0.2);
     // post
     fragColor = vec4(pow(color,vec3(0.75)), 1.0);
 }

@@ -1,0 +1,396 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"get",
+				"get_questions"
+			],
+			[
+				"Maya_Plugins_",
+				"Maya_Plugins_2016"
+			],
+			[
+				"Maya",
+				"Maya_Plugins"
+			],
+			[
+				"Hell",
+				"HelloFunc"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/ls.sublime-build",
+					""
+				],
+				[
+					"Packages/User/ls.sublime-build",
+					"echo"
+				],
+				[
+					"Packages/User/ls.sublime-build",
+					"ls"
+				]
+			],
+			[
+				"Packages/User/ls.sublime-build",
+				"echo"
+			]
+		],
+		[
+			[
+				[
+					"Sublime Build Systems",
+					""
+				],
+				[
+					"Sublime Build Systems",
+					"Make"
+				],
+				[
+					"Sublime Build Systems",
+					"Run"
+				]
+			],
+			[
+				"Sublime Build Systems",
+				"Make"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 87.0,
+		"last_filter": "install ",
+		"selected_items":
+		[
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"colors",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"maya",
+				"Preferences: Maya Settings"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/yjiang6/Documents/Programming/shaderplayground/src/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Programming/shaderplayground/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Programming/tungsten/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Programming/build/cmake_install.cmake",
+		"/Users/yjiang6/Documents/Programming/shaderplayground/makefile",
+		"/Users/yjiang6/Documents/Programming/shaderplayground/lib/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Programming/shaderplayground/include/CMakeLists.txt",
+		"/Volumes/classSpace/Dynamics_and_Particle_Systems_SCG5471A/FALL_2016/Week7/outline.txt",
+		"/Users/yjiang6/Documents/Programming/tungsten/data/example-scenes/cornell-box/scene.json",
+		"/Users/yjiang6/Documents/Programming/glfw/opengl.sublime-project",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/User/node.sublime-build",
+		"/Users/yjiang6/Documents/Programming/glfw/COPYING.txt",
+		"/Users/yjiang6/Documents/Programming/glfw/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Programming/glfw/deps/glad/glad.h",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/User/ls.sublime-build",
+		"/Users/yjiang6/Documents/Programming/glfw/opengl.sublime-workspace",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/User/ls",
+		"/Users/yjiang6/Documents/Programming/glfw/examples/Makefile",
+		"/Users/yjiang6/Documents/Programming/build/Makefile",
+		"/Users/yjiang6/Documents/Programming/glfw/examples/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Programming/glfw/examples/cmake_install.cmake",
+		"/Users/yjiang6/Documents/Programming/glfw/Makefile",
+		"/Volumes/yjiang6/Programming_for_Animators/Assign3/juliandate.py",
+		"/Volumes/yjiang6/Programming_for_Animators/Assign3/monthnum.py",
+		"/Volumes/yjiang6/Programming_for_Animators/Assign3/exercise_bool.py",
+		"/Volumes/yjiang6/Programming_for_Animators/Assign3/exercise_list.py",
+		"/Users/yjiang6/Documents/Programming/sdftoy/CMakeLists.txt",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/plug-ins/sampleCommandFlagTuple.py",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/plug-ins/hello.py",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/sources/helloTemplateWorld/helloTemplateWorld.cpp",
+		"/Users/yjiang6/.bash_profile",
+		"/Users/yjiang6/Documents/Programming/archey-osx/bin/archey",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/Color Scheme - Default/Monokai.tmTheme",
+		"/Users/yjiang6/Downloads/hukl-Smyck-Color-Scheme-fc16622/Smyck.terminal",
+		"/Users/yjiang6/Documents/Programming/sdftoy/README.md",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/sources/helloTemplateWorld/Makefile",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/Makefile.subdirs",
+		"/Users/yjiang6/Documents/Maya_Plugins_2017/devkit/plug-ins/Makefile",
+		"/Users/yjiang6/Documents/Maya_Plugins_2017/devkit/plug-ins/motionPathCmd/Makefile",
+		"/Users/yjiang6/Documents/Maya_Plugins_2017/devkit/plug-ins/buildconfig",
+		"/Users/yjiang6/Documents/Maya_Plugins_2017/devkit/plug-ins/buildrules",
+		"/Users/yjiang6/Documents/Maya_Plugins_2017/devkit/plug-ins/Makefile.subdirs",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/scripts/hello.py",
+		"/Users/yjiang6/Library/Preferences/Autodesk/maya/2016/Maya.env",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/template/zoomCameraTemplate/zoomCameraTemplate.cpp",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/template/createTransformNodeTemplate/createTransformNodeTemplate.cpp",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/template/helloTemplateWorld/helloTemplateWorld.cpp",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/buildconfig",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/buildrules",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/template/helloTemplateWorld/Makefile",
+		"/Users/yjiang6/Library/Preferences/Autodesk/maya/Maya.env",
+		"/labasst/Library/Preferences/Autodesk/maya/2016/Maya.env",
+		"/Users/yjiang6/Desktop/test.mel",
+		"/Users/yjiang6/Documents/Programming/cpp/pointer.cpp",
+		"/Users/yjiang6/Documents/Programming/cpp/Makefile",
+		"/Users/yjiang6/Desktop/traverse.py",
+		"/Applications/Autodesk/maya2016/devkit/plug-ins/template/helloTemplateWorld/Makefile",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/Makefile",
+		"/Applications/Autodesk/maya2016/devkit/plug-ins/viewObjectSetOverride/Makefile",
+		"/Users/yjiang6/Documents/Maya_Plugins/osx/devkit/plug-ins/SimpleDemo/helloWorld.cpp",
+		"/Users/yjiang6/Documents/Programming/cpp/pointer.h",
+		"/Users/yjiang6/Documents/maya/dependency/devkit/plug-ins/Makefile",
+		"/Users/yjiang6/Documents/maya/plugin-ins/helloWorld.cpp",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/User/MayaSublime.sublime-settings",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/MayaSublime/MayaSublime.sublime-settings",
+		"/Users/yjiang6/Library/Application Support/Sublime Text 3/Packages/Maya/Maya.sublime-settings"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"main",
+			"TARGET",
+			"Target",
+			"TARGET",
+			"main",
+			"find_library",
+			"QUICKTIME_LIBRARY",
+			"Cocoa_LIBRARY",
+			"QUICKTIME",
+			"QuickTime",
+			"Cocoa",
+			"CARBON",
+			"Carbon",
+			"CARBON",
+			"Carbon",
+			"MHDVIEWER_EXE_NAME",
+			"FindOpenVDB",
+			"${core_libs}",
+			"OpenVDB",
+			"OPENVDB",
+			"OpenVDB",
+			"OPENVDB",
+			"OpenVDB",
+			"OPENGL_LIBRARIES",
+			"OpenGL",
+			"main",
+			"OpenEXR",
+			"LINK_DIRECTORIES",
+			"libSOIL",
+			"libglfw3",
+			"SHARED",
+			"libGLEW",
+			"glad",
+			"_gladLoadGLLoader",
+			"wave.dir",
+			"boing",
+			"playground",
+			"wave",
+			"init_vertices",
+			"linmath",
+			"drawTours",
+			"working_dir",
+			"drawTours",
+			"glMaterialf",
+			"draw_scene",
+			"calc_grid",
+			"cursor_position_callback",
+			"ball_x",
+			"RADIUS",
+			"DIST_BALL",
+			"glfwSetKeyCallback",
+			"linmath",
+			"month",
+			"33",
+			"MacOSX10.9",
+			"mplugins",
+			"template",
+			"Template",
+			"template",
+			"archey"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 242.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Sublime Build Systems",
+	"project": "shaderplayground.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"makefi",
+				"Makefile"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 129.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
