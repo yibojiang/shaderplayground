@@ -18,7 +18,7 @@ out vec4 fragColor;
 
 
 
-#define LOD true
+#define LOD false
 // Created by inigo quilez - iq/2013
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
@@ -29,40 +29,43 @@ float iqhash( float n )
 }
 
 // noise.
-// float noise( vec3 x )
-// {
-//     // The noise function returns a value in the range -1.0f -> 1.0f
-//     vec3 p = floor(x);
-//     vec3 f = fract(x);
-
-//     f       = f*f*(3.0-2.0*f);
-//     float n = p.x + p.y*57.0 + 113.0*p.z;
-//     return mix(mix(mix( iqhash(n+0.0  ), iqhash(n+1.0  ),f.x),
-//                    mix( iqhash(n+57.0 ), iqhash(n+58.0 ),f.x),f.y),
-//                mix(mix( iqhash(n+113.0), iqhash(n+114.0),f.x),
-//                    mix( iqhash(n+170.0), iqhash(n+171.0),f.x),f.y),f.z);
-// }
-
-float noise( in vec3 x )
+float noise( vec3 x )
 {
+    // The noise function returns a value in the range -1.0f -> 1.0f
     vec3 p = floor(x);
     vec3 f = fract(x);
-    f = f*f*(3.0-2.0*f);
-    vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
-    vec2 rg = texture( iChannel0, (uv+ 0.5)/256.0, -100.0 ).yx;
-    return -1.0+2.0*mix( rg.x, rg.y, f.z );
+
+    f       = f*f*(3.0-2.0*f);
+    float n = p.x + p.y*57.0 + 113.0*p.z;
+    return mix(mix(mix( iqhash(n+0.0  ), iqhash(n+1.0  ),f.x),
+                   mix( iqhash(n+57.0 ), iqhash(n+58.0 ),f.x),f.y),
+               mix(mix( iqhash(n+113.0), iqhash(n+114.0),f.x),
+                   mix( iqhash(n+170.0), iqhash(n+171.0),f.x),f.y),f.z);
 }
+
+// float noise( in vec3 x )
+// {
+//     vec3 p = floor(x);
+//     vec3 f = fract(x);
+//     f = f*f*(3.0-2.0*f);
+//     vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
+//     vec2 rg = texture( iChannel0, (uv+ 0.5)/256.0, -100.0 ).yx;
+//     return -1.0+2.0*mix( rg.x, rg.y, f.z );
+// }
 
 float map5( in vec3 p )
 {
-    vec3 q = p - vec3(0.0,0.1,1.0)*iGlobalTime;
+    vec3 q = p - vec3(0.0,0.1,1.0)*iGlobalTime*0.0;
     float f;
     f  = 0.50000*noise( q ); q = q*2.02;
     f += 0.25000*noise( q ); q = q*2.03;
     f += 0.12500*noise( q ); q = q*2.01;
     f += 0.06250*noise( q ); q = q*2.02;
     f += 0.03125*noise( q );
-    return clamp( 1.5 - p.y - 2.0 + 1.75*f, 0.0, 1.0 );
+    // return clamp( 1.5 - p.y - 2.0 + 1.75*f, 0.0, 1.0 );
+    // return clamp( 1.5 - length(p) - 2.0 + 1.75*f, 0.0, 1.0 );
+    // return clamp(-length(p - vec3(0.0, -1.0, 0.0) + f * 5 * sin(iGlobalTime)) + 1.0, 0.0, 1.0);
+    return -length(p - vec3(0.0, -1.0, 0.0)) + f*(1.0 + sin(iGlobalTime * 1.0)) * 3.0 ;
 }
 
 float map4( in vec3 p )
@@ -152,7 +155,7 @@ vec4 render( in vec3 ro, in vec3 rd )
     // sun glare    
     col += 0.2*vec3(1.0,0.4,0.2)*pow( sun, 3.0 );
 
-    return vec4( col, 1.0 );
+    return vec4( col * 0.8, 1.0 );
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
@@ -161,7 +164,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // vec2 p = fragCoord*2.0 - 1.0;
     // p.x = p.x * iResolution.y / iResolution.x;
 
-    vec2 m = iMouse.xy/iResolution.xy;
+    vec2 m = vec2(iGlobalTime * 0.1, 1.0);
+    if (iMouse.w > 0.0){
+        m = iMouse.xy/iResolution.xy;
+    }
     
     // camera
     vec3 ro = 4.0*normalize(vec3(sin(3.0*m.x), 0.4*m.y, cos(3.0*m.x)));

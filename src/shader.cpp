@@ -73,6 +73,15 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
   glShaderSource(fragmentShader, 1, &fShaderCode, NULL);
   glCompileShader(fragmentShader);
 
+  glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+
+  // Check if it succeeds.
+  if(!success)
+  {
+      glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+      std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+  }
+
   shaderProgram = glCreateProgram();
   glAttachShader(shaderProgram, vertexShader);
   glAttachShader(shaderProgram, fragmentShader);

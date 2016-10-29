@@ -173,7 +173,7 @@ float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
 
-    vec2 uv = fragCoord.xy;
+    vec2 uv = fragCoord.xy / iResolution.xy;
     uv = uv * 2.0 - 1.0;
     uv.x *= iResolution.x / iResolution.y;
     float mouse = 0.0;

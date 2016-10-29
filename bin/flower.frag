@@ -52,7 +52,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	const float duration = 1.0;
    float t = duration * (1. + sin(3.0 * iGlobalTime ) );
    
-   vec2 p = fragCoord.xy;
+   vec2 p = fragCoord.xy / iResolution.xy;
    
    float ratio = iResolution.y / iResolution.x;
    

@@ -15,10 +15,10 @@
 
 GLfloat vertices[] = {
     // Positions          // Colors           // Texture Coords
-    1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
-    1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
-    -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-    -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
+    1.0f,  1.0f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right 0
+    1.0f, -1.0f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right 1
+    -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,  0.0f, 0.0f, // Bottom Left 2
+    -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,  0.0f, 1.0f  // Top Left 3
 };
 
 GLfloat vertices3[] = {
@@ -54,6 +54,7 @@ GLuint indices[] = {
     1, 2, 3
 };
 
+
 Shader *shader;
 // Window dimensions
 
@@ -66,7 +67,7 @@ Shader *shader;
 #include <unistd.h>
 #include <ctime>
 //#include <Python.h>
-const GLuint WIDTH = 800, HEIGHT = 600;
+const GLuint WIDTH = 1280, HEIGHT = 720;
 using namespace std;
 char* fragpath;
 double mousexPos, mouseyPos;
@@ -146,7 +147,10 @@ int main(int argc,char** argv)
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
+    int count;
+    GLFWmonitor** monitors = glfwGetMonitors(&count);
     // Create a GLFWwindow object that we can use for GLFW's functions
+    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[1], nullptr);
     GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
     if (window == nullptr)
     {
@@ -213,42 +217,71 @@ int main(int argc,char** argv)
     //4. Unbind the VAO
     glBindVertexArray(0);
     
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    // Set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // Set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    
-    int texWidth, texHeight;
-    // texWidth = 10000;
-    // texHeight = 10000;
-    unsigned char* image = SOIL_load_image("tex16.png", &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
-    cout << "loading iamge: " << endl;
-    if (image == NULL)
-        cout << "image is null" << endl; 
-    else
-        cout << "image is loaded" << endl;
-//    The first argument specifies the texture target; setting this to GL_TEXTURE_2D means this operation will generate a texture on the currently bound texture object at the same target (so any textures bound to targets GL_TEXTURE_1D or GL_TEXTURE_3D will not be affected).
-//    The second argument specifies the mipmap level for which we want to create a texture for if you want to set each mipmap level manually, but we'll leave it at the base level which is 0.
-//        The third argument tells OpenGL in what kind of format we want to store the texture. Our image has only RGB values so we'll store the texture with RGB values as well.
-//        The 4th and 5th argument sets the width and height of the resulting texture. We stored those earlier when loading the image so we'll use the corresponding variables.
-//        The next argument should always be 0 (some legacy stuff).
-//        The 7th and 8th argument specify the format and datatype of the source image. We loaded the image with RGB values and stored them as chars (bytes) so we'll pass in the corresponding values.
-//        The last argument is the actual image data.
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-    // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, image);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    
-    SOIL_free_image_data(image);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    char* *texturename = new char*[4];
+    texturename[0] = "tex16_256.png";
+    texturename[1] = "tex12_256.png";
+    texturename[2] = "tex10.png";
+    texturename[3] = "tex14.png";
+    GLuint *texture = new GLuint[4];
+    for (int i = 0; i < 4; ++i)
+    {
+        glGenTextures(1, &texture[i]);
+        glBindTexture(GL_TEXTURE_2D, texture[i]);
+        // Set the texture wrapping parameters
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);   // Set texture wrapping to GL_REPEAT (usually basic wrapping method)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        // Set texture filtering parameters
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        
+        int texWidth, texHeight;
+        // texWidth = 10000;
+        // texHeight = 10000;
+        unsigned char* image = SOIL_load_image(texturename[i], &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
 
+        cout << "loading iamge: " << endl;
+        if (image == NULL)
+            cout << "image is null" << endl; 
+        else
+            cout << "image is loaded" << endl;
+    //    The first argument specifies the texture target; setting this to GL_TEXTURE_2D means this operation will generate a texture on the currently bound texture object at the same target (so any textures bound to targets GL_TEXTURE_1D or GL_TEXTURE_3D will not be affected).
+    //    The second argument specifies the mipmap level for which we want to create a texture for if you want to set each mipmap level manually, but we'll leave it at the base level which is 0.
+    //        The third argument tells OpenGL in what kind of format we want to store the texture. Our image has only RGB values so we'll store the texture with RGB values as well.
+    //        The 4th and 5th argument sets the width and height of the resulting texture. We stored those earlier when loading the image so we'll use the corresponding variables.
+    //        The next argument should always be 0 (some legacy stuff).
+    //        The 7th and 8th argument specify the format and datatype of the source image. We loaded the image with RGB values and stored them as chars (bytes) so we'll pass in the corresponding values.
+    //        The last argument is the actual image data.
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+        // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, image);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        
+        SOIL_free_image_data(image);
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+    
+
+
+
+
+    double lastTime = glfwGetTime();
+    int nbFrames =0;
     // Game loop
     while (!glfwWindowShouldClose(window))
     {
+        // If you intend to make a 60fps game, your target will be 16.6666ms ; 
+        // If you intend to make a 30fps game, your target will be 33.3333ms. That’s all you need to know.
+        double currentTime = glfwGetTime();
+        nbFrames++;
+        if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
+            // printf and reset timer
+            // printf("%f ms/frame\n", 1000.0/double(nbFrames));
+            cout << 1000.0/double(nbFrames) << " ms/frame" << endl;
+            nbFrames = 0;
+            lastTime += 1.0;
+        }
+
+
+
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
         
@@ -279,7 +312,27 @@ int main(int argc,char** argv)
         double seconds = difftime(t,mktime(&y2k));
         glUniform4f(fragDateLocation, now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, seconds);
 
-        glBindTexture(GL_TEXTURE_2D, texture);
+        GLuint texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel0");
+        glUniform1i(texLoc, 0);
+
+        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel1");
+        glUniform1i(texLoc, 1);
+
+        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel2");
+        glUniform1i(texLoc, 2);
+
+        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel3");
+        glUniform1i(texLoc, 3);
+        
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture[0]);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture[1]);
+        glActiveTexture(GL_TEXTURE2);
+        glBindTexture(GL_TEXTURE_2D, texture[2]);
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, texture[3]);
+        // cout<<"texture: "<< texture[0] << texture[1] << endl;
         glBindVertexArray(VAO);
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
