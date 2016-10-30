@@ -17,6 +17,8 @@ void main()
     gl_Position = vec4(position, 1.0);
     vertexColor = color;   
     vertexPosition = position;
+
     fragCoord = texCoord * iResolution;
+    // fragCoord = vec2(texCoord.x, 1.0f - texCoord.y) * iResolution;
     
 }

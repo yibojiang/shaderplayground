@@ -74,7 +74,8 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
 {
     mousebutton = button;
     mouseaction = action;
-    // cout << button << ", " << action << ", " << mods << endl;
+    cout << button << ", " << action << ", " << mods << endl;
+    cout << mousexPos << ", " << mouseyPos << endl;
 }
 
 // The MAIN function, from here we start the application and run the game loop
@@ -169,10 +170,10 @@ int main(int argc,char** argv)
     glBindVertexArray(0);
     
     char* *texturename = new char*[4];
-    texturename[0] = "tex16_256.png";
-    texturename[1] = "tex12_256.png";
-    texturename[2] = "tex10.png";
-    texturename[3] = "tex14.png";
+    texturename[0] = "tex16.png";
+    texturename[1] = "tex12.png";
+    texturename[2] = "tex05.png";
+    texturename[3] = "tex10.png";
     GLuint *texture = new GLuint[4];
     for (int i = 0; i < 4; ++i)
     {
@@ -186,11 +187,9 @@ int main(int argc,char** argv)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         
         int texWidth, texHeight;
-        // texWidth = 10000;
-        // texHeight = 10000;
         unsigned char* image = SOIL_load_image(texturename[i], &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
 
-        cout << "loading iamge: " << endl;
+        cout << "loading image: "<< texturename[i] << endl;
         if (image == NULL)
             cout << "image is null" << endl; 
         else
