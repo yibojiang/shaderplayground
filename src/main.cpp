@@ -33,7 +33,7 @@ GLuint indices[] = {
 #include <unistd.h>
 #include <ctime>
 //#include <Python.h>
-const GLuint WIDTH = 1280, HEIGHT = 720;
+const GLuint WIDTH = 380, HEIGHT = 320;
 using namespace std;
 
 Shader *shader;
