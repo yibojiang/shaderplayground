@@ -184,7 +184,7 @@ int main(int argc,char** argv)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         // Set texture filtering parameters
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GzL_LINEAR);
         
         int texWidth, texHeight;
         unsigned char* image = SOIL_load_image(texturename[i], &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
