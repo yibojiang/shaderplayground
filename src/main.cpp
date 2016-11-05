@@ -34,7 +34,8 @@ GLuint indices[] = {
 #include <ctime>
 //#include <Python.h>
 // const GLuint WIDTH = 3840, HEIGHT = 2080;
-const GLuint WIDTH = 3456, HEIGHT = 1944;
+// const GLuint WIDTH = 3456, HEIGHT = 1944;
+const GLuint WIDTH = 640, HEIGHT = 480;
 using namespace std;
 
 Shader *shader;
@@ -103,8 +104,8 @@ int main(int argc,char** argv)
     int count;
     GLFWmonitor** monitors = glfwGetMonitors(&count);
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[0], nullptr);
-    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
+    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[0], nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;

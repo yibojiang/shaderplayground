@@ -164,12 +164,12 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 	vec3 color = vec3(1.0);
 	
 	
-	vec2 p = (uv- vec2(-0.9, 0.5) ) * 100.0 * (0.5 + 0.5 * sin(iGlobalTime * 0.1 ) );
+	vec2 p = (uv- vec2(-0.9, 0.5) ) * 10.0 * (0.5 + 0.5 * sin(iGlobalTime * 0.1 ) );
 	// color = vec3(vnoise(p * 80.0));
 	// float border = getBorder(p);
 	float border = vnoise2(p);
 	// float border = voronoi3(p).x;
-	color = vec3(1.0) * (1.0-smoothstep(0.0, 0.05, border));
+	color = vec3(1.0) * (1.0 - smoothstep(0.0, 0.05, border));
 	fragColor = vec4(color.xyz, 1.0);
 }
 
