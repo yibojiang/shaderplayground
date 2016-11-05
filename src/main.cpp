@@ -33,7 +33,8 @@ GLuint indices[] = {
 #include <unistd.h>
 #include <ctime>
 //#include <Python.h>
-const GLuint WIDTH = 380, HEIGHT = 320;
+// const GLuint WIDTH = 3840, HEIGHT = 2080;
+const GLuint WIDTH = 3456, HEIGHT = 1944;
 using namespace std;
 
 Shader *shader;
@@ -102,8 +103,8 @@ int main(int argc,char** argv)
     int count;
     GLFWmonitor** monitors = glfwGetMonitors(&count);
     // Create a GLFWwindow object that we can use for GLFW's functions
-    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[1], nullptr);
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[0], nullptr);
+    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -184,7 +185,7 @@ int main(int argc,char** argv)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         // Set texture filtering parameters
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GzL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         
         int texWidth, texHeight;
         unsigned char* image = SOIL_load_image(texturename[i], &texWidth, &texHeight, 0, SOIL_LOAD_RGB);

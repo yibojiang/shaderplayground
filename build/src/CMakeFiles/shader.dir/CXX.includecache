@@ -22,7 +22,7 @@ OpenGL/glu.h
 GL/glu.h
 -
 
-/Users/yibojiang/Documents/Programming/shaderplayground/src/Shader.hpp
+/Users/yjiang6/Documents/Programming/shaderplayground/src/Shader.hpp
 stdio.h
 -
 fstream
@@ -34,9 +34,9 @@ iostream
 GL/glew.h
 -
 
-/Users/yibojiang/Documents/Programming/shaderplayground/src/shader.cpp
+/Users/yjiang6/Documents/Programming/shaderplayground/src/shader.cpp
 Shader.hpp
-/Users/yibojiang/Documents/Programming/shaderplayground/src/Shader.hpp
+/Users/yjiang6/Documents/Programming/shaderplayground/src/Shader.hpp
 unistd.h
 -
 

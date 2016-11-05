@@ -1,4 +1,4 @@
-# Install script for directory: /Users/yibojiang/Documents/Programming/shaderplayground/src
+# Install script for directory: /Users/yjiang6/Documents/Programming/shaderplayground/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -64,7 +64,7 @@ vulkan/vulkan.h
 
 ../include/SOIL.h
 
-/Users/yibojiang/Documents/Programming/shaderplayground/src/main.cpp
+/Users/yjiang6/Documents/Programming/shaderplayground/src/main.cpp
 iostream
 -
 GL/glew.h
@@ -72,7 +72,7 @@ GL/glew.h
 GLFW/glfw3.h
 -
 shader.hpp
-/Users/yibojiang/Documents/Programming/shaderplayground/src/shader.hpp
+/Users/yjiang6/Documents/Programming/shaderplayground/src/shader.hpp
 SOIL.h
 -
 iostream
@@ -82,7 +82,7 @@ unistd.h
 ctime
 -
 
-/Users/yibojiang/Documents/Programming/shaderplayground/src/shader.hpp
+/Users/yjiang6/Documents/Programming/shaderplayground/src/shader.hpp
 stdio.h
 -
 fstream
