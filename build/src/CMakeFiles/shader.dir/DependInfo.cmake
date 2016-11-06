@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/yjiang6/Documents/Programming/shaderplayground/src/shader.cpp" "/Users/yjiang6/Documents/Programming/shaderplayground/build/src/CMakeFiles/shader.dir/shader.cpp.o"
+  "/Users/yibojiang/Documents/Programming/shaderplayground/src/shader.cpp" "/Users/yibojiang/Documents/Programming/shaderplayground/build/src/CMakeFiles/shader.dir/shader.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 

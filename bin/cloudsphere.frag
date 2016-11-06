@@ -28,30 +28,33 @@ float iqhash( float n )
     return fract(sin(n)*43758.5453);
 }
 
-// noise.
-float noise( vec3 x )
-{
-    // The noise function returns a value in the range -1.0f -> 1.0f
-    vec3 p = floor(x);
-    vec3 f = fract(x);
-
-    f       = f*f*(3.0-2.0*f);
-    float n = p.x + p.y*57.0 + 113.0*p.z;
-    return mix(mix(mix( iqhash(n+0.0  ), iqhash(n+1.0  ),f.x),
-                   mix( iqhash(n+57.0 ), iqhash(n+58.0 ),f.x),f.y),
-               mix(mix( iqhash(n+113.0), iqhash(n+114.0),f.x),
-                   mix( iqhash(n+170.0), iqhash(n+171.0),f.x),f.y),f.z);
-}
-
-// float noise( in vec3 x )
+// value noise.
+// float noise( vec3 x )
 // {
+//     // The noise function returns a value in the range -1.0f -> 1.0f
 //     vec3 p = floor(x);
 //     vec3 f = fract(x);
-//     f = f*f*(3.0-2.0*f);
-//     vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
-//     vec2 rg = texture( iChannel0, (uv+ 0.5)/256.0, -100.0 ).yx;
-//     return -1.0+2.0*mix( rg.x, rg.y, f.z );
+
+//     f       = f*f*(3.0-2.0*f);
+//     float n = p.x + p.y*57.0 + 113.0*p.z;
+//     return mix(mix(mix( iqhash(n+0.0  ), iqhash(n+1.0  ),f.x),
+//                    mix( iqhash(n+57.0 ), iqhash(n+58.0 ),f.x),f.y),
+//                mix(mix( iqhash(n+113.0), iqhash(n+114.0),f.x),
+//                    mix( iqhash(n+170.0), iqhash(n+171.0),f.x),f.y),f.z);
 // }
+
+float noise( in vec3 x )
+{
+    float freq = iGlobalTime;
+    x = x - vec3(freq);
+    vec3 p = floor(x);
+    vec3 f = fract(x);
+    f = f*f*(3.0-2.0*f);
+    vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
+    vec2 rg = texture( iChannel0, (uv+ 0.5)/256.0, -100.0 ).yx;
+    // return -1.0+2.0*mix( rg.x, rg.y, f.z );
+    return mix( rg.x, rg.y, f.z );
+}
 
 float map5( in vec3 p )
 {
@@ -65,7 +68,8 @@ float map5( in vec3 p )
     // return clamp( 1.5 - p.y - 2.0 + 1.75*f, 0.0, 1.0 );
     // return clamp( 1.5 - length(p) - 2.0 + 1.75*f, 0.0, 1.0 );
     // return clamp(-length(p - vec3(0.0, -1.0, 0.0) + f * 5 * sin(iGlobalTime)) + 1.0, 0.0, 1.0);
-    return -length(p - vec3(0.0, -1.0, 0.0)) + f*(1.0 + sin(iGlobalTime * 1.0)) * 3.0 ;
+    // return -length(p - vec3(0.0, -1.0, 0.0)) + 2.0 * f*(0.5 + 0.5 * sin(iGlobalTime * 1.0)) * 3.0 ;
+    return -length(p - vec3(0.0, -1.0, 0.0)) + f * 6.0 ;
 }
 
 float map4( in vec3 p )
@@ -125,7 +129,7 @@ vec4 raymarch( in vec3 ro, in vec3 rd, in vec3 bgcol )
         MARCH(30,map2);
     }
     else{
-        MARCH(300,map5);
+        MARCH(80,map5);
     }
     
 
@@ -145,8 +149,8 @@ vec4 render( in vec3 ro, in vec3 rd )
 {
     // background sky     
     float sun = clamp( dot(sundir,rd), 0.0, 1.0 );
-    vec3 col = vec3(0.6,0.71,0.75) - rd.y*0.2*vec3(1.0,0.5,1.0) + 0.15*0.5;
-    col += 0.2*vec3(1.0,.6,0.1)*pow( sun, 8.0 );
+    vec3 col = vec3(0.5,0.61,0.65) - rd.y*0.2*vec3(1.0,0.5,1.0) + 0.15*0.5;
+    col += 0.1*vec3(1.0,.6,0.1)*pow( sun, 8.0 );
 
     // clouds    
     vec4 res = raymarch( ro, rd, col );

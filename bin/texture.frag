@@ -9,6 +9,7 @@ uniform sampler2D iChannel0;
 uniform sampler2D iChannel1;
 uniform sampler2D iChannel2;
 uniform sampler2D iChannel3;
+uniform sampler2D iChannel4;
 
 uniform vec4 iDate;
 uniform float iGlobalTime;
@@ -19,7 +20,7 @@ out vec4 fragColor;
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
 	vec2 uv = fragCoord.xy / iResolution.xy;
-    fragColor = texture(iChannel3, uv) * vec4(vec3(1.0), 1.0);
+    fragColor = texture(iChannel4, uv) * vec4(vec3(1.0), 1.0);
 }
 
 void main()
