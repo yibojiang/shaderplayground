@@ -69,7 +69,7 @@ float map5( in vec3 p )
     // return clamp( 1.5 - length(p) - 2.0 + 1.75*f, 0.0, 1.0 );
     // return clamp(-length(p - vec3(0.0, -1.0, 0.0) + f * 5 * sin(iGlobalTime)) + 1.0, 0.0, 1.0);
     // return -length(p - vec3(0.0, -1.0, 0.0)) + 2.0 * f*(0.5 + 0.5 * sin(iGlobalTime * 1.0)) * 3.0 ;
-    return -length(p - vec3(0.0, -1.0, 0.0)) + f * 6.0 ;
+    return -length(p - vec3(0.0, 0.0, 0.0)) + f * 6.0 ;
 }
 
 float map4( in vec3 p )
@@ -168,11 +168,14 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     // vec2 p = fragCoord*2.0 - 1.0;
     // p.x = p.x * iResolution.y / iResolution.x;
 
-    vec2 m = vec2(iGlobalTime * 0.1, 1.0);
-    if (iMouse.w > 0.0){
-        m = iMouse.xy/iResolution.xy;
-    }
+    vec2 m = vec2(0.0);
+    // if (iMouse.w > 0.0){
+    //     m = iMouse.xy/iResolution.xy;
     
+    // }
+    m = iMouse.xy/iResolution.xy;
+    m.x += 0.1 * iGlobalTime;
+
     // camera
     vec3 ro = 4.0*normalize(vec3(sin(3.0*m.x), 0.4*m.y, cos(3.0*m.x)));
     vec3 ta = vec3(0.0, -1.0, 0.0);
