@@ -39,11 +39,10 @@ GLuint indices[] = {
 //#include <Python.h>
 const GLuint WIDTH = 3840, HEIGHT = 2080;
 // const GLuint WIDTH = 3456, HEIGHT = 1944;
-<<<<<<< HEAD
-=======
-const GLuint WIDTH = 320, HEIGHT = 240;
+
+// const GLuint WIDTH = 320, HEIGHT = 240;
 // const GLuint WIDTH = 800, HEIGHT = 600;
->>>>>>> 2b300ef2cb531aede5bde4b646e0058a404e36e6
+
 // const GLuint WIDTH = 640, HEIGHT = 480;
 using namespace std;
 
