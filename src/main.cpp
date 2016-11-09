@@ -11,6 +11,10 @@
 #include "shader.hpp"
 #include <SOIL.h>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 
 
 GLfloat vertices[] = {
@@ -35,6 +39,11 @@ GLuint indices[] = {
 //#include <Python.h>
 const GLuint WIDTH = 3840, HEIGHT = 2080;
 // const GLuint WIDTH = 3456, HEIGHT = 1944;
+<<<<<<< HEAD
+=======
+const GLuint WIDTH = 320, HEIGHT = 240;
+// const GLuint WIDTH = 800, HEIGHT = 600;
+>>>>>>> 2b300ef2cb531aede5bde4b646e0058a404e36e6
 // const GLuint WIDTH = 640, HEIGHT = 480;
 using namespace std;
 
@@ -171,13 +180,14 @@ int main(int argc,char** argv)
     //4. Unbind the VAO
     glBindVertexArray(0);
     
-    char* *texturename = new char*[4];
+    char* *texturename = new char*[5];
     texturename[0] = "tex16.png";
     texturename[1] = "tex12.png";
     texturename[2] = "tex05.png";
     texturename[3] = "tex10.png";
-    GLuint *texture = new GLuint[4];
-    for (int i = 0; i < 4; ++i)
+    texturename[4] = "tex14.png";
+    GLuint *texture = new GLuint[5];
+    for (int i = 0; i < 5; ++i)
     {
         glGenTextures(1, &texture[i]);
         glBindTexture(GL_TEXTURE_2D, texture[i]);
@@ -243,6 +253,9 @@ int main(int argc,char** argv)
         
 //        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         shader->Use();
+
+        
+
         GLfloat timeValue = glfwGetTime();
         GLuint fragTimeLocation = glGetUniformLocation(shader->shaderProgram, "iGlobalTime");
         glUniform1f(fragTimeLocation, timeValue);
@@ -251,7 +264,7 @@ int main(int argc,char** argv)
         glUniform2f(fragResLocation, WIDTH, HEIGHT);
 
         GLuint fragMouseLocation = glGetUniformLocation(shader->shaderProgram, "iMouse");
-        glUniform4f(fragMouseLocation, mousexPos, mouseyPos, mousebutton, mouseaction);
+        glUniform4f(fragMouseLocation, mousexPos, HEIGHT-mouseyPos, mousebutton, mouseaction);
 
         GLuint fragDateLocation = glGetUniformLocation(shader->shaderProgram, "iDate");
 
@@ -264,6 +277,17 @@ int main(int argc,char** argv)
         double seconds = difftime(t,mktime(&y2k));
         glUniform4f(fragDateLocation, now->tm_year + 1900, now->tm_mon + 1, now->tm_mday, seconds);
 
+
+        
+        GLuint transformLoc = glGetUniformLocation(shader->shaderProgram, "transform");
+        glm::mat4 trans;
+        // trans = glm::rotate(trans, glm::radians(180.0f), glm::vec3(1.0, 0.0, 0.0));
+        // trans = glm::rotate(trans, glm::radians(180.0f), glm::vec3(0.0, 0.0, 1.0));
+        // cout<<timeValue<<endl;
+        trans = glm::scale(trans, glm::vec3(1, 1, 1));  
+        // 
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+
         GLuint texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel0");
         glUniform1i(texLoc, 0);
 
@@ -275,6 +299,9 @@ int main(int argc,char** argv)
 
         texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel3");
         glUniform1i(texLoc, 3);
+
+        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel4");
+        glUniform1i(texLoc, 4);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -284,6 +311,8 @@ int main(int argc,char** argv)
         glBindTexture(GL_TEXTURE_2D, texture[2]);
         glActiveTexture(GL_TEXTURE3);
         glBindTexture(GL_TEXTURE_2D, texture[3]);
+        glActiveTexture(GL_TEXTURE4);
+        glBindTexture(GL_TEXTURE_2D, texture[4]);
         // cout<<"texture: "<< texture[0] << texture[1] << endl;
         glBindVertexArray(VAO);
         

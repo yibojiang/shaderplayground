@@ -28,11 +28,11 @@ float angular = 5.0;
 float drawStar(vec2 o, float size, float startAngle) {
   vec2 q = o;
   q *= normalize(iResolution).xy;
-  mat4 RotationMatrix = mat4( cos( startAngle ), -sin( startAngle ), 0.0, 0.0,
+  mat4 rot = mat4( cos( startAngle ), -sin( startAngle ), 0.0, 0.0,
                               sin( startAngle ),  cos( startAngle ), 0.0, 0.0,
                               0.0,           0.0, 1.0, 0.0,
                               0.0,           0.0, 0.0, 1.0 );
-  q = (RotationMatrix * vec4(q, 0.0, 1.0)).xy;
+  q = (rot * vec4(q, 0.0, 1.0)).xy;
   float angle = atan( q.y, q.x ) / (2.*pi);
   float segment = angle * angular;
   float segmentI = floor(segment);
