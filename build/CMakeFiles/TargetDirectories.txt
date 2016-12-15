@@ -1,6 +1,0 @@
-/Users/yibojiang/Documents/Programming/shaderplayground/build/CMakeFiles/edit_cache.dir
-/Users/yibojiang/Documents/Programming/shaderplayground/build/CMakeFiles/rebuild_cache.dir
-/Users/yibojiang/Documents/Programming/shaderplayground/build/src/CMakeFiles/edit_cache.dir
-/Users/yibojiang/Documents/Programming/shaderplayground/build/src/CMakeFiles/rebuild_cache.dir
-/Users/yibojiang/Documents/Programming/shaderplayground/build/src/CMakeFiles/shader.dir
-/Users/yibojiang/Documents/Programming/shaderplayground/build/src/CMakeFiles/playground.dir

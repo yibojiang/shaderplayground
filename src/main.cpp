@@ -36,12 +36,23 @@ GLuint indices[] = {
 #include <iostream>
 #include <unistd.h>
 #include <ctime>
+<<<<<<< HEAD
 
 // const GLuint WIDTH = 3840, HEIGHT = 2080;
 // const GLuint WIDTH = 3456, HEIGHT = 1944;
 // const GLuint WIDTH = 320, HEIGHT = 240;
 // const GLuint WIDTH = 800, HEIGHT = 600;
 GLuint WIDTH = 640, HEIGHT = 480;
+=======
+//#include <Python.h>
+const GLuint WIDTH = 3840, HEIGHT = 2080;
+// const GLuint WIDTH = 3456, HEIGHT = 1944;
+
+// const GLuint WIDTH = 320, HEIGHT = 240;
+// const GLuint WIDTH = 800, HEIGHT = 600;
+
+// const GLuint WIDTH = 640, HEIGHT = 480;
+>>>>>>> 558046b811049d79ff5e1b6525f032db307d9203
 using namespace std;
 
 Shader *shader;
@@ -118,8 +129,8 @@ int main(int argc, char** argv)
     int count;
     GLFWmonitor** monitors = glfwGetMonitors(&count);
     // Create a GLFWwindow object that we can use for GLFW's functions
-    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[0], nullptr);
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", monitors[0], nullptr);
+    // GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Shader Playground", nullptr, nullptr);
     if (window == nullptr)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
