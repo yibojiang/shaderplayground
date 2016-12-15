@@ -69,7 +69,7 @@ float map5( in vec3 p )
     // return clamp( 1.5 - length(p) - 2.0 + 1.75*f, 0.0, 1.0 );
     // return clamp(-length(p - vec3(0.0, -1.0, 0.0) + f * 5 * sin(iGlobalTime)) + 1.0, 0.0, 1.0);
     // return -length(p - vec3(0.0, -1.0, 0.0)) + 2.0 * f*(0.5 + 0.5 * sin(iGlobalTime * 1.0)) * 3.0 ;
-    return -length(p - vec3(0.0, 0.0, 0.0)) + f * 6.0 ;
+    return -length(p - vec3(0.0, -1.0, 0.0)) + f +  2.0 ;
 }
 
 float map4( in vec3 p )
@@ -107,12 +107,15 @@ vec4 integrate( in vec4 sum, in float dif, in float den, in vec3 bgcol, in float
     // lighting
     vec3 lin = vec3(0.65,0.7,0.75)*1.4 + vec3(1.0, 0.6, 0.3)*dif;        
     vec4 col = vec4( mix( vec3(1.0,0.95,0.8), vec3(0.25,0.3,0.35), den ), den );
+    
+    
     col.xyz *= lin;
     col.xyz = mix( col.xyz, bgcol, 1.0-exp(-0.003*t*t) );
     // front to back blending    
     col.a *= 0.4;
     col.rgb *= col.a;
-    return sum + col*(1.0-sum.a);
+    // return vec4(1.0, 0.95, 0.8, 1.0);
+    return sum + col *(1.0-sum.a);
 }
 
 #define MARCH(STEPS,MAPLOD) for(int i=0; i<STEPS; i++) { vec3  pos = ro + t*rd; if( pos.y<-3.0 || pos.y>2.0 || sum.a > 0.99 ) break; float den = MAPLOD( pos ); if( den>0.01 ) { float dif =  clamp((den - MAPLOD(pos+0.3*sundir))/0.6, 0.0, 1.0 ); sum = integrate( sum, dif, den, bgcol, t ); } t += max(0.05,0.02*t); }
@@ -129,7 +132,22 @@ vec4 raymarch( in vec3 ro, in vec3 rd, in vec3 bgcol )
         MARCH(30,map2);
     }
     else{
-        MARCH(80,map5);
+        // MARCH(80,map5);
+        for(int i=0; i<80; i++) {
+            vec3  pos = ro + t*rd;
+            // if( pos.y<-3.0 || pos.y>2.0 || sum.a > 0.99 ) 
+            //     break; 
+            if (sum.a > 0.99 ) 
+                break;
+
+            float den = map5( pos ); 
+            if( den>0.01 ) { 
+
+                float dif =  clamp((den - map5(pos+0.3*sundir))/0.6, 0.0, 1.0 ); 
+                sum = integrate( sum, dif, den, bgcol, t ); 
+            } 
+            t += max(0.05,0.02*t); 
+        }
     }
     
 

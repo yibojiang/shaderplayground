@@ -36,12 +36,12 @@ GLuint indices[] = {
 #include <iostream>
 #include <unistd.h>
 #include <ctime>
-//#include <Python.h>
+
 // const GLuint WIDTH = 3840, HEIGHT = 2080;
 // const GLuint WIDTH = 3456, HEIGHT = 1944;
-const GLuint WIDTH = 320, HEIGHT = 240;
+// const GLuint WIDTH = 320, HEIGHT = 240;
 // const GLuint WIDTH = 800, HEIGHT = 600;
-// const GLuint WIDTH = 640, HEIGHT = 480;
+GLuint WIDTH = 640, HEIGHT = 480;
 using namespace std;
 
 Shader *shader;
@@ -87,12 +87,20 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
 }
 
 // The MAIN function, from here we start the application and run the game loop
-int main(int argc,char** argv)
+int main(int argc, char** argv)
 {
     cout << "argc = " << argc << endl; 
     for(int i = 0; i < argc; i++) 
         cout << "argv[" << i << "] = " << argv[i] << endl;
     fragpath = argv[1];
+    if (argv[2] && argv[3]){
+
+        WIDTH = atoi(argv[2]);
+        HEIGHT = atoi(argv[3]);
+    }  
+    cout<< "Size:" << WIDTH << ", "<< HEIGHT << endl;
+
+    
     cout << "compile shader " << fragpath << endl;
 
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
