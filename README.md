@@ -21,16 +21,13 @@ Note: Sublime Build System Configuration
             },
 
             { "name": "Run With Shader",
-              "shell_cmd": "./playground terrain_test.frag 640 480",
-              "working_dir": "${project_path:${folder}}/bin",
-            },
-            { "name": "Run",
-              "shell_cmd": "./playground default.frag",
+              "shell_cmd": "./playground $file 640 480",
               "working_dir": "${project_path:${folder}}/bin",
             }
         ]
       }
     ]
 }
+
 
 ```
