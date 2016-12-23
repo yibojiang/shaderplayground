@@ -103,7 +103,7 @@ float calcAO( in vec3 pos, in vec3 nor )
 	{
 	    float hr = 0.01 + 0.12*float(i)/4.0;
 	    vec3 aopos =  nor * hr + pos;
-	    float dd = scebe(aopos);
+	    float dd = scene(aopos);
 	    occ += -(dd-hr)*sca;
 	    sca *= 0.95;
 	}

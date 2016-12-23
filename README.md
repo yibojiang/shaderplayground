@@ -1,6 +1,6 @@
 # shaderplayground
 
-Note: Sublime Build System Configuration
+Note: Sublime Project and Build System Configuration
 ```
 {
   "folders":
