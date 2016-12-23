@@ -295,7 +295,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
 
 
-  uv = fragCoord.xy / iResolution.xy;
+  // uv = fragCoord.xy / iResolution.xy;
 
   // vec3 tc = vec3( 1.0, 1.0, 0.0 );
   // float star = drawStar( uv - vec2( 0.5, 0.5 ), 0.0045, pi / 4.0  );

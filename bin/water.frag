@@ -6,52 +6,89 @@ in vec3 vertexPosition;
 in vec2 fragCoord;
 
 uniform sampler2D iChannel0;
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+
+uniform vec4 iDate;
 uniform float iGlobalTime;
 uniform vec2 iResolution;
-uniform vec4 iDate;
 uniform vec4 iMouse;
 out vec4 fragColor;
 
+#ifdef GL_ES
+precision highp float;
+#endif
+
+const float PI = 3.1415926535897932;
+
+const float speed = 0.2;
+const float speed_x = 0.3;
+const float speed_y = 0.3;
+
+const float emboss = 0.50;
+const float intensity = 2.4;
+const int steps = 8;
+const float frequency = 6.0;
+const int angle = 7;
+
+const float delta = 60.;
+const float intence = 700.;
+
+const float reflectionCutOff = 0.012;
+const float reflectionIntence = 200000.;
 
 
-// void mainImage( out vec4 fragColor, in vec2 fragCoord )
-// {
-//     vec2 uv = fragCoord.xy;
-//     fragColor = vec4(uv,0.5+0.5*sin(iGlobalTime),1.0);
-// }
+float time = iGlobalTime*1.3;
 
-// #define rmouse (iMouse*iResolution)
-float d = 1.0/length(vec2(1.0));
+  float col(vec2 coord)
+  {
+    float delta_theta = 2.0 * PI / float(angle);
+    float col = 0.0;
+    float theta = 0.0;
+    for (int i = 0; i < steps; i++)
+    {
+      vec2 adjc = coord;
+      // theta = delta_theta*float(i);
+      theta+=delta_theta;
+      adjc.x += cos(theta)*time*speed + time * speed_x;
+      adjc.y -= sin(theta)*time*speed - time * speed_y;
+      // adjc = m2 * adjc
+      col = col + cos( (adjc.x*cos(theta) - adjc.y*sin(theta))*frequency)*intensity;
+    }
 
-vec2 position(vec2 v) {
-  return vec2(v.x, v.y);
+    return cos(col);
+  }
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+  vec2 p = (fragCoord.xy) / iResolution.xy, c1 = p, c2 = p;
+  float cc1 = col(c1);
+
+  c2.x += iResolution.x/delta;
+  float dx = emboss*(cc1-col(c2))/delta;
+
+  c2.x = p.x;
+  c2.y += iResolution.y/delta;
+  float dy = emboss*(cc1-col(c2))/delta;
+
+  c1.x += dx*2.;
+  c1.y = -(c1.y+dy*2.);
+
+  float alpha = 1.+dot(dx,dy)*intence;
+  	
+  float ddx = dx - reflectionCutOff;
+  float ddy = dy - reflectionCutOff;
+  if (ddx > 0. && ddy > 0.){
+  	alpha = pow(alpha, ddx*ddy*reflectionIntence);
+  }
+  	
+  vec4 col = texture(iChannel2,c1)*(alpha);
+  fragColor = col;
 }
 
-void main() {
-	vec2 mmouse = iMouse.xy/ iResolution.;
-	vec2 pos = position(fragCoord.xy);
-	vec2 dx  = position(vec2(1.0,0.0));
-	vec2 dy  = position(vec2(0.0,1.0));
-	
-	float dist = length(iMouse.xy-fragCoord.xy);
-	float i = 1.0 - smoothstep(0.0 ,15.0, dist);
-	
-	vec4 me = texture(iChannel0,fragCoord);
-	float a = texture(iChannel0,pos+dx).r+texture(iChannel0,pos+dx+dy).r*d
-	+ texture(iChannel0,pos-dx).r+texture(iChannel0,pos-dx+dy).r*d
-	+ texture(iChannel0,pos+dy).r+texture(iChannel0,pos+dx-dy).r*d
-	+ texture(iChannel0,pos-dy).r+texture(iChannel0,pos-dx-dy).r*d;
-	a *= 0.146;
-	
-	me.g+=a-me.r;
-	me.g*=0.999;
-	me.g -=0.0009;
-	me.r+=me.g-log(1.+(a*a)*0.0009);
-	me.b =log(3.*(me.r+me.g)+1.);
-
-
-	fragColor = vec4(vec3(me)+vec3(i,0,0),1.);
-	// fragColor = vec4(1.0);
+void main()
+{
+    mainImage(fragColor, fragCoord);
 }
-
 
