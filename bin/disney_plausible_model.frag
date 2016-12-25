@@ -1,19 +1,3 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
-
 
 // References: http://disney-animation.s3.amazonaws.com/library/s2012_pbs_disney_brdf_notes_v2.pdf
 
@@ -681,8 +665,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     }
 
     fragColor.a = 1.;
-}
-void main()
-{
-    mainImage(fragColor, fragCoord);
 }

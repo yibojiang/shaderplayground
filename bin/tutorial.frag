@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 /*
 by UÄŸur GÃ¼ney. March 8, 2014. 
 
@@ -1843,7 +1829,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 #endif
 
 
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}

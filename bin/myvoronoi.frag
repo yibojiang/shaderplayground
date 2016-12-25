@@ -1,18 +1,3 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 
 vec2 hash2(vec2 p){
 	vec2 v = vec2(dot(p, vec2(332.3,331.2)),
@@ -173,7 +158,3 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 	fragColor = vec4(color.xyz, 1.0);
 }
 
-void main(){
-
-  mainImage(fragColor, fragCoord);
-}

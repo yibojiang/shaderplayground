@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 
 #define REALLY_SMALL_NUMBER 0.0001
 #define BIG_NUMBER 1000000.
@@ -174,7 +160,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     fragColor = vec4(c, 1.);
 }
 
-void main()
-{
-  mainImage(fragColor, fragCoord);
-}

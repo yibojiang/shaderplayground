@@ -1,20 +1,3 @@
-
-
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 // Created by inigo quilez - 2015
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0
 
@@ -43,16 +26,16 @@ float sdTorus( vec3 p, vec2 t )
 
 float sdCapsule( vec3 p, vec3 a, vec3 b, float r )
 {
-	vec3 pa = p-a, ba = b-a;
-	float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
-	return length( pa - ba*h ) - r;
+    vec3 pa = p-a, ba = b-a;
+    float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+    return length( pa - ba*h ) - r;
 }
 
 vec2 udSegment( vec3 p, vec3 a, vec3 b )
 {
-	vec3 pa = p-a, ba = b-a;
-	float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
-	return vec2( length( pa - ba*h ), h );
+    vec3 pa = p-a, ba = b-a;
+    float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+    return vec2( length( pa - ba*h ), h );
 }
 
 float sdBox( vec3 p, vec3 b )
@@ -83,47 +66,47 @@ vec3 getClosest( vec2 b0, vec2 b1, vec2 b2 )
 
 vec4 sdBezier( vec3 a, vec3 b, vec3 c, vec3 p )
 {
-	vec3 w = normalize( cross( c-b, a-b ) );
-	vec3 u = normalize( c-b );
-	vec3 v = normalize( cross( w, u ) );
+    vec3 w = normalize( cross( c-b, a-b ) );
+    vec3 u = normalize( c-b );
+    vec3 v = normalize( cross( w, u ) );
 
-	vec2 a2 = vec2( dot(a-b,u), dot(a-b,v) );
-	vec2 b2 = vec2( 0.0 );
-	vec2 c2 = vec2( dot(c-b,u), dot(c-b,v) );
-	vec3 p3 = vec3( dot(p-b,u), dot(p-b,v), dot(p-b,w) );
+    vec2 a2 = vec2( dot(a-b,u), dot(a-b,v) );
+    vec2 b2 = vec2( 0.0 );
+    vec2 c2 = vec2( dot(c-b,u), dot(c-b,v) );
+    vec3 p3 = vec3( dot(p-b,u), dot(p-b,v), dot(p-b,w) );
 
-	vec3 cp = getClosest( a2-p3.xy, b2-p3.xy, c2-p3.xy );
+    vec3 cp = getClosest( a2-p3.xy, b2-p3.xy, c2-p3.xy );
 
-	return vec4( sqrt(dot(cp.xy,cp.xy)+p3.z*p3.z), cp.z, length(cp.xy), p3.z );
+    return vec4( sqrt(dot(cp.xy,cp.xy)+p3.z*p3.z), cp.z, length(cp.xy), p3.z );
 }
 
 float smin( float a, float b, float k )
 {
-	float h = clamp( 0.5 + 0.5*(b-a)/k, 0.0, 1.0 );
-	return mix( b, a, h ) - k*h*(1.0-h);
+    float h = clamp( 0.5 + 0.5*(b-a)/k, 0.0, 1.0 );
+    return mix( b, a, h ) - k*h*(1.0-h);
 }
 
 vec2 smin( vec2 a, vec2 b, float k )
 {
-	float h = clamp( 0.5 + 0.5*(b.x-a.x)/k, 0.0, 1.0 );
-	return vec2( mix( b.x, a.x, h ) - k*h*(1.0-h), mix( b.y, a.y, h ) );
+    float h = clamp( 0.5 + 0.5*(b.x-a.x)/k, 0.0, 1.0 );
+    return vec2( mix( b.x, a.x, h ) - k*h*(1.0-h), mix( b.y, a.y, h ) );
 }
 vec4 smin( vec4 a, vec4 b, float k )
 {
-	float h = clamp( 0.5 + 0.5*(b.x-a.x)/k, 0.0, 1.0 );
-	return vec4( mix( b.x, a.x, h ) - k*h*(1.0-h), mix( b.yzw, a.yzw, h ) );
+    float h = clamp( 0.5 + 0.5*(b.x-a.x)/k, 0.0, 1.0 );
+    return vec4( mix( b.x, a.x, h ) - k*h*(1.0-h), mix( b.yzw, a.yzw, h ) );
 }
 
 float smax( float a, float b, float k )
 {
-	float h = clamp( 0.5 + 0.5*(b-a)/k, 0.0, 1.0 );
-	return mix( a, b, h ) + k*h*(1.0-h);
+    float h = clamp( 0.5 + 0.5*(b-a)/k, 0.0, 1.0 );
+    return mix( a, b, h ) + k*h*(1.0-h);
 }
 
 vec3 smax( vec3 a, vec3 b, float k )
 {
-	vec3 h = clamp( 0.5 + 0.5*(b-a)/k, 0.0, 1.0 );
-	return mix( a, b, h ) + k*h*(1.0-h);
+    vec3 h = clamp( 0.5 + 0.5*(b-a)/k, 0.0, 1.0 );
+    return mix( a, b, h ) + k*h*(1.0-h);
 }
 
 //---------------------------------------------------------------------------
@@ -194,7 +177,7 @@ float mapShell( in vec3 p, out vec4 matInfo )
     else        { d = d2; dx=r2-r; dy=h2; }
 
 
-    float di = texture( iChannel2, vec2(t+r,0.5) ).x;
+    float di = texture2D( iChannel8, vec2(t+r,0.5) ).x;
     d += 0.002*di;
     
     matInfo = vec4(dx,dy,r/0.4,t/3.14159);
@@ -280,7 +263,7 @@ vec2 mapSnail( vec3 p, out vec4 matInfo )
     d1 = smax( d1, -sdEllipsoid( pp, vec3(-0.08,-0.0,0.0), vec3(0.06,0.55,0.1) ), 0.02 );
     
     // disp
-    float dis = texture( iChannel1, 5.0*p.xy ).x;
+    float dis = texture2D( iChannel18, 5.0*p.xy ).x;
     float dx = 0.5 + 0.5*(1.0-smoothstep(0.5,1.0,b1.y));
     d1 -= 0.005*dis*dx*0.5;
         
@@ -332,7 +315,7 @@ vec2 mapOpaque( vec3 p, out vec4 matInfo )
 {
     matInfo = vec4(0.0);
     
-   	//--------------
+    //--------------
     vec2 res = mapSnail( p, matInfo );
     
     //---------------
@@ -347,8 +330,8 @@ vec2 mapOpaque( vec3 p, out vec4 matInfo )
     d4 = b3.x;
     d4 -= 0.04 - 0.02*b3.y;
     if( d4<res.x  ) { res = vec2(d4,3.0); }
-	
-	//----------------------------
+    
+    //----------------------------
     
     float d5 = mapLeaf( p );
     if( d5<res.x ) res = vec2(d5,4.0);
@@ -361,9 +344,9 @@ vec3 calcNormalOpaque( in vec3 pos, in float eps )
     vec4 kk;
     vec2 e = vec2(1.0,-1.0)*0.5773*eps;
     return normalize( e.xyy*mapOpaque( pos + e.xyy, kk ).x + 
-					  e.yyx*mapOpaque( pos + e.yyx, kk ).x + 
-					  e.yxy*mapOpaque( pos + e.yxy, kk ).x + 
-					  e.xxx*mapOpaque( pos + e.xxx, kk ).x );
+                      e.yyx*mapOpaque( pos + e.yyx, kk ).x + 
+                      e.yxy*mapOpaque( pos + e.yxy, kk ).x + 
+                      e.xxx*mapOpaque( pos + e.xxx, kk ).x );
 }
 
 //=========================================================================
@@ -414,9 +397,9 @@ vec3 calcNormalTransparent( in vec3 pos, in float eps )
     vec4 kk;
     vec2 e = vec2(1.0,-1.0)*0.5773*eps;
     return normalize( e.xyy*mapTransparent( pos + e.xyy, kk ).x + 
-					  e.yyx*mapTransparent( pos + e.yyx, kk ).x + 
-					  e.yxy*mapTransparent( pos + e.yxy, kk ).x + 
-					  e.xxx*mapTransparent( pos + e.xxx, kk ).x );
+                      e.yyx*mapTransparent( pos + e.yyx, kk ).x + 
+                      e.yxy*mapTransparent( pos + e.yxy, kk ).x + 
+                      e.xxx*mapTransparent( pos + e.xxx, kk ).x );
 }
 
 //=========================================================================
@@ -424,23 +407,23 @@ vec3 calcNormalTransparent( in vec3 pos, in float eps )
 float calcAO( in vec3 pos, in vec3 nor )
 {
     vec4 kk;
-	float ao = 0.0;
+    float ao = 0.0;
     for( int i=0; i<32; i++ )
     {
         vec3 ap = forwardSF( float(i), 32.0 );
         float h = hash1(float(i));
-		ap *= sign( dot(ap,nor) ) * h*0.1;
+        ap *= sign( dot(ap,nor) ) * h*0.1;
         ao += clamp( mapOpaque( pos + nor*0.01 + ap, kk ).x*3.0, 0.0, 1.0 );
     }
-	ao /= 32.0;
-	
+    ao /= 32.0;
+    
     return clamp( ao*6.0, 0.0, 1.0 );
 }
 
 float calcSSS( in vec3 pos, in vec3 nor )
 {
     vec4 kk;
-	float occ = 0.0;
+    float occ = 0.0;
     for( int i=0; i<8; i++ )
     {
         float h = 0.002 + 0.11*float(i)/7.0;
@@ -462,7 +445,7 @@ float calcSoftShadow( in vec3 ro, in vec3 rd, float k )
         float h = mapOpaque(ro + rd*t, kk ).x;
         res = min( res, smoothstep(0.0,1.0,k*h/t) );
         t += clamp( h, 0.04, 0.1 );
-		if( res<0.01 ) break;
+        if( res<0.01 ) break;
     }
     return clamp(res,0.0,1.0);
 }
@@ -486,7 +469,7 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
 
     if( m<1.5 ) // snail body
     {
-        float dis = texture( iChannel1, 5.0*pos.xy ).x;
+        float dis = texture2D( iChannel18, 5.0*pos.xy ).x;
 
         float be = sdEllipsoid( pos, vec3(-0.3,-0.5,-0.1), vec3(0.2,1.0,0.5) );
         be = 1.0-smoothstep( -0.01, 0.01, be );        
@@ -508,13 +491,13 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
         
         float f = clamp( dot( -rd, nor ), 0.0, 1.0 );
         f = 1.0-pow( f, 8.0 );
-        f = 1.0 - (1.0-f)*(1.0-texture( iChannel2, 0.3*pos.xy ).x);
+        f = 1.0 - (1.0-f)*(1.0-texture2D( iChannel8, 0.3*pos.xy ).x);
         mateS *= vec3(0.5,0.1,0.0) + f*vec3(0.5,0.9,1.0);
         
         float b = 1.0-smoothstep( 0.25,0.55,abs(pos.y));
         focc = 0.2 + 0.8*smoothstep( 0.0, 0.15, sdSphere(pos,vec4(0.05,0.52,0.0,0.13)) );
     }
-	else if( m<2.5 ) // shell
+    else if( m<2.5 ) // shell
     {
         mateK = vec2(0.0);
         
@@ -523,7 +506,7 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
         
         vec2 uv = vec2( .5*atan(matInfo.x,matInfo.y)/3.1416, 1.5*matInfo.w );
         
-        vec3 ral = texture( iChannel1, vec2(2.0*matInfo.w+matInfo.z*0.5,0.5) ).xxx;
+        vec3 ral = texture2D( iChannel18, vec2(2.0*matInfo.w+matInfo.z*0.5,0.5) ).xxx;
         mateD *= 0.25 + 0.75*ral;
         
         float pa = smoothstep(-0.2,0.2, 0.3+sin(2.0+40.0*uv.x + 3.0*sin(11.0*uv.x)) );
@@ -543,7 +526,7 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
         float fre = clamp(1.0+dot(nor,rd), 0.0, 1.0 );
         mateD += 0.2*fre*vec3(1.0,0.5,0.1);
         
-        vec3 te = texture( iChannel2, pos.xy*0.2 ).xyz;
+        vec3 te = texture2D( iChannel8, pos.xy*0.2 ).xyz;
         mateS *= 0.5 + 1.5*te;
         mateE = 0.5*vec3(0.1,0.1,0.03)*(0.2+0.8*te.x);
     }
@@ -562,7 +545,7 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
         
         float rr = sin( 4.0*0.25*50.0*p.x - 4.0*0.25*75.0*abs(p.z) );
 
-        vec3 te = texture( iChannel2, p.xz*0.35 ).xyz;
+        vec3 te = texture2D( iChannel8, p.xz*0.35 ).xyz;
 
         float r = clamp((p.x+2.0)/4.0,0.0,1.0);
         r = r*(1.0-r)*(1.0-r)*6.0;
@@ -581,7 +564,7 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
         
         //---------------------
         
-        nor.xz += v*0.15*(-1.0+2.0*texture( iChannel3, 1.0*p.xz ).xy);
+        nor.xz += v*0.15*(-1.0+2.0*texture2D( iChannel15, 1.0*p.xz ).xy);
         nor = normalize( nor );
 
         float d1 = sdEllipsoid( q, vec3( 0.5-0.07, 0.0,  0.20), 1.0*vec3(1.4*0.15,0.13,0.15) );
@@ -632,7 +615,7 @@ vec3 shadeOpaque( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 matInf
     
     col += vec3(1.0,1.0,1.0)*0.2*pow( spe1, 1.0+mateK.x )*dif1*(0.04+0.96*pow(fre,4.0))*mateK.x*mateK.y;   // sun lobe1
     col += vec3(1.0,1.0,1.0)*0.1*pow( spe1, 1.0+mateK.x/3.0 )*dif1*(0.1+0.9*pow(fre,4.0))*mateK.x*mateK.y; // sun lobe2
-	col += 0.1*vec3(1.0,max(1.5-0.7*col.y,0.0),2.0)*occ*occ*smoothstep( 0.0, 0.3, reflect( rd, nor ).y )*mateK.x*mateK.y*(0.04+0.96*pow(fre,5.0)); // sky
+    col += 0.1*vec3(1.0,max(1.5-0.7*col.y,0.0),2.0)*occ*occ*smoothstep( 0.0, 0.3, reflect( rd, nor ).y )*mateK.x*mateK.y*(0.04+0.96*pow(fre,5.0)); // sky
 
     col += mateE;
 
@@ -663,7 +646,7 @@ vec3 shadeTransparent( in vec3 ro, in vec3 rd, in float t, in float m, in vec4 m
     col += ds*0.9*vec3(0.6,0.7,1.0)*smoothstep( -0.5, 0.5, -reflect( rd, nor ).y )*smoothstep(0.2,0.4,fre);    
     col += ds*0.5*vec3(1.0,0.9,0.8)*pow( spe2, 80.0 );
     col += ds*0.5*vec3(1.0,0.9,0.8)*pow( spe2, 16.0 );
-    col += vec3(0.8,1.0,0.8)*0.5*smoothstep(0.3,0.6,texture( iChannel1, 0.8*nor.xy ).x)*(0.1+0.9*fre*fre);
+    col += vec3(0.8,1.0,0.8)*0.5*smoothstep(0.3,0.6,texture2D( iChannel18, 0.8*nor.xy ).x)*(0.1+0.9*fre*fre);
     
     // hide aliasing a bit
     col = mix( col, oriCol, smoothstep(0.6,1.0,fre) ); 
@@ -688,7 +671,7 @@ vec2 intersectOpaque( in vec3 ro, in vec3 rd, const float mindist, const float m
         
         t += h.x*0.9;
     }
-	return res;
+    return res;
 }
 
 vec2 intersectTransparent( in vec3 ro, in vec3 rd, const float mindist, const float maxdist, out vec4 matInfo )
@@ -706,7 +689,7 @@ vec2 intersectTransparent( in vec3 ro, in vec3 rd, const float mindist, const fl
         
         t += h.x;
     }
-	return res;
+    return res;
 }
 
 vec3 background( in vec3 d )
@@ -725,7 +708,7 @@ vec3 background( in vec3 d )
         float an = 31.0*6.2831*h;
         vec2  of = vec2( cos(an), sin(an) ) * h;
 
-        vec3 tmp = texture( iChannel2, uv*0.25 + 0.0075*of, 4.0 ).yxz;
+        vec3 tmp = texture2D( iChannel8, uv*0.25 + 0.0075*of, 4.0 ).yxz;
         col = smax( col, tmp, 0.5 );
     }
     
@@ -786,7 +769,7 @@ mat3 setCamera( in vec3 ro, in vec3 rt, in float cr )
 }
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{	
+{   
 
     #if AA<2
     
@@ -818,7 +801,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
             mat3 ca = setCamera( ro, ta, 0.0 );
             vec3 rd = normalize( ca * vec3(p,-2.8) );
 
-		    col += render( ro, rd, q );
+            col += render( ro, rd, q );
         }    
         col /= float(AA*AA);
     #endif
@@ -826,9 +809,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     fragColor = vec4( col, 1.0 );
 }
-
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}
-

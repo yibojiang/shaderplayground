@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 // Some useful functions
 vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
 vec2 mod289(vec2 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -87,7 +73,9 @@ float snoise(vec2 v) {
     return 130.0 * dot(m, g);
 }
 
-void main() {
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+
     vec2 st = fragCoord.xy/iResolution.xy;
     st.x *= iResolution.x/iResolution.y;
 

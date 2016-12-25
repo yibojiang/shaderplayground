@@ -1,0 +1,74 @@
+argc = 4
+argv[0] = ./playground
+argv[1] = /Users/admin/Documents/Programming/shaderplayground/bin/simplex.frag
+argv[2] = 640
+argv[3] = 480
+Size:640, 480
+compile shader /Users/admin/Documents/Programming/shaderplayground/bin/simplex.frag
+Starting GLFW context, OpenGL 3.3
+Current dir: /Users/admin/Documents/Programming/shaderplayground/binopening
+loading image: tex01.jpg
+Image loaded
+image is loaded
+loading image: tex02.jpg
+Image loaded
+image is loaded
+loading image: tex03.jpg
+Image loaded
+image is loaded
+loading image: tex04.jpg
+Image loaded
+image is loaded
+loading image: tex05.png
+Image loaded
+image is loaded
+loading image: tex06.jpg
+Image loaded
+image is loaded
+loading image: tex07.jpg
+Image loaded
+image is loaded
+loading image: tex08.jpg
+Image loaded
+image is loaded
+loading image: tex09.jpg
+Image loaded
+image is loaded
+loading image: tex10.png
+Image loaded
+image is loaded
+loading image: tex11.png
+Image loaded
+image is loaded
+loading image: tex12.png
+Image loaded
+image is loaded
+loading image: tex13.png
+Unable to open file
+image is null
+loading image: tex14.png
+Image loaded
+image is loaded
+loading image: tex15.png
+Image loaded
+image is loaded
+loading image: tex16.png
+Image loaded
+image is loaded
+loading image: tex17.jpg
+Image loaded
+image is loaded
+loading image: tex18.jpg
+Image loaded
+image is loaded
+loading image: tex19.png
+Image loaded
+image is loaded
+loading image: tex20.jpg
+Image loaded
+image is loaded
+loading image: tex21.png
+Image loaded
+image is loaded
+
+[Finished in 1.5s]

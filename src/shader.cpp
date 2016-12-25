@@ -12,6 +12,7 @@
 #include <unistd.h>
 using namespace std;
 
+#define MULTI_LINE_STRING(a) #a
 
 Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
   string vertexCode;
@@ -39,6 +40,51 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
     
     vertexCode = vShaderStream.str();
     fragmentCode = fShaderStream.str();
+
+    fragmentCode = MULTI_LINE_STRING(#version 330 core
+    in vec3 vertexColor;
+    in vec3 vertexPosition;
+    in vec2 fragCoord;
+
+    uniform sampler2D iChannel0;
+    uniform sampler2D iChannel1;
+    uniform sampler2D iChannel2;
+    uniform sampler2D iChannel3;
+    uniform sampler2D iChannel4;
+    uniform sampler2D iChannel5;
+    uniform sampler2D iChannel6;
+    uniform sampler2D iChannel7;
+    uniform sampler2D iChannel8;
+    uniform sampler2D iChannel9;
+    uniform sampler2D iChannel10;
+    uniform sampler2D iChannel11;
+    uniform sampler2D iChannel12;
+    uniform sampler2D iChannel13;
+    uniform sampler2D iChannel14;
+    uniform sampler2D iChannel15;
+    uniform sampler2D iChannel16;
+    uniform sampler2D iChannel17;
+    uniform sampler2D iChannel18;
+    uniform sampler2D iChannel19;
+    uniform sampler2D iChannel20;
+
+
+    uniform samplerCube skybox0;
+    uniform samplerCube skybox1;
+    uniform samplerCube skybox2;
+
+    uniform vec3 iChannelResolution[21];
+
+    uniform vec4 iDate;
+    uniform float iGlobalTime;
+    uniform vec2 iResolution;
+    uniform vec4 iMouse;
+    out vec4 fragColor;
+    vec4 texture2D(sampler2D sampler, vec2 coord){mat2 mt = mat2(1, 0, 0, -1); return texture(sampler, mt*coord);}
+    vec4 texture2D(sampler2D sampler, vec2 coord, float bias){mat2 mt = mat2(1, 0, 0, -1); return texture(sampler, mt*coord, bias);}
+    vec4 textureCube(samplerCube sampler, vec3 coord){mat2 mt = mat2(1, 0, 0, -1); return texture(sampler, coord);}
+    )
+    + fragmentCode+ "void main(){mainImage(fragColor, fragCoord);}";
     
     // cout << "out" << vertexCode << fragmentCode << endl;
 

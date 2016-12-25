@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 //Sirenian Dawn by nimitz (twitter: @stormoid)
 
 #define ITR 90
@@ -28,10 +14,10 @@ vec3 noised( in vec2 x )
     vec2 p = floor(x);
     vec2 f = fract(x);
     vec2 u = f * f * (3.0 - 2.0 * f);
-    float a = texture(iChannel0, (p + vec2(0.5, 0.5)) / 256.0, -100.0).x;
-    float b = texture(iChannel0, (p + vec2(1.5, 0.5)) / 256.0, -100.0).x;
-    float c = texture(iChannel0, (p + vec2(0.5, 1.5)) / 256.0, -100.0).x;
-    float d = texture(iChannel0, (p + vec2(1.5, 1.5)) / 256.0, -100.0).x;
+    float a = texture(iChannel11, (p + vec2(0.5, 0.5)) / 256.0, -100.0).x;
+    float b = texture(iChannel11, (p + vec2(1.5, 0.5)) / 256.0, -100.0).x;
+    float c = texture(iChannel11, (p + vec2(0.5, 1.5)) / 256.0, -100.0).x;
+    float d = texture(iChannel11, (p + vec2(1.5, 1.5)) / 256.0, -100.0).x;
     return vec3(a + (b - a) * u.x + (c - a) * u.y + (a - b - c + d) * u.x * u.y,
                 6.0 * f * (1.0 - f) * (vec2(b - a, c - a) + (a - b - c + d) * u.yx));
 }
@@ -272,7 +258,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     fragColor = vec4(col, 1.0);
 }
 
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}

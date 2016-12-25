@@ -14,7 +14,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
+#include <string>
+#include <vector>
 
 
 GLfloat vertices[] = {
@@ -29,9 +30,6 @@ GLuint indices[] = {
     0, 1, 3,
     1, 2, 3
 };
-
-
-
 
 #include <iostream>
 #include <unistd.h>
@@ -51,9 +49,15 @@ char* fragpath;
 double mousexPos, mouseyPos;
 
 
+struct Vector{ float x,y,z; };
+
+
+GLuint loadCubemap(vector<const GLchar*> faces);
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mousemove_callback(GLFWwindow* window, double xPos, double yPos);
 void mouse_callback(GLFWwindow *window, int button, int action, int mods);
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
     // When a user presses the escape key, we set the WindowShouldClose property to true,
@@ -63,6 +67,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, GL_TRUE);
     
     if(key == GLFW_KEY_ENTER && action == GLFW_PRESS){
+        delete shader;
         shader = new Shader("v.vert", fragpath);
         cout << "compile shader " << fragpath << endl;
         
@@ -88,6 +93,34 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
     cout << mousexPos << ", " << mouseyPos << endl;
 }
 
+GLuint loadCubemap(vector<const GLchar*> faces)
+{
+    GLuint textureID;
+    glGenTextures(1, &textureID);
+
+    int width,height;
+    unsigned char* image;
+    
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    for(GLuint i = 0; i < faces.size(); i++)
+    {
+        image = SOIL_load_image(faces[i], &width, &height, 0, SOIL_LOAD_RGB);
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+        SOIL_free_image_data(image);
+
+        cout << "loading image: "<< faces[i] << endl;
+        cout<< SOIL_last_result()<<endl;
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+    return textureID;
+}
+
 // The MAIN function, from here we start the application and run the game loop
 int main(int argc, char** argv)
 {
@@ -100,9 +133,7 @@ int main(int argc, char** argv)
         WIDTH = atoi(argv[2]);
         HEIGHT = atoi(argv[3]);
     }  
-    cout<< "Size:" << WIDTH << ", "<< HEIGHT << endl;
-
-    
+    cout<< "Size:" << WIDTH << ", "<< HEIGHT << endl;    
     cout << "compile shader " << fragpath << endl;
 
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
@@ -187,28 +218,56 @@ int main(int argc, char** argv)
     //4. Unbind the VAO
     glBindVertexArray(0);
     
-    char* *texturename = new char*[5];
-    texturename[0] = "tex16.png";
-    texturename[1] = "tex12.png";
-    texturename[2] = "tex05.png";
-    texturename[3] = "tex10.png";
-    texturename[4] = "tex14.png";
-    GLuint *texture = new GLuint[5];
-    for (int i = 0; i < 5; ++i)
-    {
+    int texCount = 21;
+    // char* *texturename = new char*[texCount];
+    string *texturename = new string[texCount];
+    texturename[0] = "tex01.jpg";
+    texturename[1] = "tex02.jpg";
+    texturename[2] = "tex03.jpg";
+    texturename[3] = "tex04.jpg";
+    texturename[4] = "tex05.png";
+    texturename[5] = "tex06.jpg";
+    texturename[6] = "tex07.jpg";
+    texturename[7] = "tex08.jpg";
+    texturename[8] = "tex09.jpg";
+    texturename[9] = "tex10.png";
+    texturename[10] = "tex11.png";
+    texturename[11] = "tex12.png";
+    texturename[12] = "tex13.png";
+    texturename[13] = "tex14.png";
+    texturename[14] = "tex15.png";
+    texturename[15] = "tex16.png";
+    texturename[16] = "tex17.jpg";
+    texturename[17] = "tex18.jpg";
+    texturename[18] = "tex19.png";
+    texturename[19] = "tex20.jpg";
+    texturename[20] = "tex21.png";
+
+    Vector *iChannelResolution = new Vector[texCount];
+
+    GLuint *texture = new GLuint[texCount];
+    for (int i = 0; i < texCount; ++i){
+
         glGenTextures(1, &texture[i]);
         glBindTexture(GL_TEXTURE_2D, texture[i]);
         // Set the texture wrapping parameters
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);   // Set texture wrapping to GL_REPEAT (usually basic wrapping method)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         // Set texture filtering parameters
+
+        // Texture Minification.
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        // Texture Magnification.
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
         int texWidth, texHeight;
-        unsigned char* image = SOIL_load_image(texturename[i], &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
+        unsigned char* image = SOIL_load_image(texturename[i].c_str(), &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
 
         cout << "loading image: "<< texturename[i] << endl;
+        cout<< SOIL_last_result()<<endl;
         if (image == NULL)
             cout << "image is null" << endl; 
         else
@@ -222,16 +281,44 @@ int main(int argc, char** argv)
     //        The last argument is the actual image data.
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, image);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        
+        // glGenerateMipmap(GL_TEXTURE_2D);
+        iChannelResolution[i].x = texWidth;
+        iChannelResolution[i].y = texHeight;
+
         SOIL_free_image_data(image);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
+
+    int skyboxCount = 3;
+    GLuint *skyboxTexture = new GLuint[skyboxCount];
+    string *skytexturename = new string[skyboxCount];
+    string *skytextureext = new string[skyboxCount];
+    skytexturename[0] = "cube00";skytextureext[0] = "jpg";
+    skytexturename[1] = "cube01";skytextureext[1] = "png";
+    skytexturename[2] = "cube02";skytextureext[2] = "jpg";
+
+    for (int i = 0; i < skyboxCount; ++i){
+        vector<const GLchar*> faces;
+
+        for (int j = 0; j < 6; ++j){
+            char buff[100];
+            string buffAsStdStr = buff;
+            snprintf(buff, sizeof(buff), "%s/%s_%d.%s", skytexturename[i].c_str(), skytexturename[i].c_str(), j, skytextureext[i].c_str());
+            // string buffAsStdStr = buff;
+            // faces.push_back(buffAsStdStr.c_str());
+            faces.push_back(buff);
+        }
+        
+        // GLuint skyboxTexture = loadCubemap(faces);      
+        skyboxTexture[i] = loadCubemap(faces);
+    }
+    // Cubemap (Skybox)
     
 
-
-
-
+    // GLuint textureID;
+    // glGenTextures(1, &textureID);
+    // glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    
     double lastTime = glfwGetTime();
     int nbFrames =0;
     // Game loop
@@ -275,6 +362,7 @@ int main(int argc, char** argv)
 
         GLuint fragDateLocation = glGetUniformLocation(shader->shaderProgram, "iDate");
 
+
         time_t t = time(0);
         struct tm * now = localtime( & t );
         
@@ -295,32 +383,33 @@ int main(int argc, char** argv)
         // 
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
-        GLuint texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel0");
-        glUniform1i(texLoc, 0);
-
-        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel1");
-        glUniform1i(texLoc, 1);
-
-        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel2");
-        glUniform1i(texLoc, 2);
-
-        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel3");
-        glUniform1i(texLoc, 3);
-
-        texLoc = glGetUniformLocation(shader->shaderProgram, "iChannel4");
-        glUniform1i(texLoc, 4);
         
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture[0]);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture[1]);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, texture[2]);
-        glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, texture[3]);
-        glActiveTexture(GL_TEXTURE4);
-        glBindTexture(GL_TEXTURE_2D, texture[4]);
-        // cout<<"texture: "<< texture[0] << texture[1] << endl;
+        
+        for (int i = 0; i < texCount; i++ ){
+
+            string channelid = "iChannel" + to_string(i);
+            // string channelResid = "iChannelResolution" + to_string(i);
+            // cout<<"binding channel: "<<channelid<<endl;
+            // texResLoc = glGetUniformLocation(shader->shaderProgram, channelResid.c_str());
+            glUniform3fv(glGetUniformLocation(shader->shaderProgram, "iChannelResolution"), texCount, (const GLfloat*)iChannelResolution);
+            glUniform1i(glGetUniformLocation(shader->shaderProgram, channelid.c_str()), i); 
+            glActiveTexture(GL_TEXTURE0 + i);
+            glBindTexture(GL_TEXTURE_2D, texture[i]);
+        }
+
+        
+        // Now draw the nanosuit
+
+        for (int i = 0; i < skyboxCount; ++i)
+        {
+            string skyboxid = "skybox" + to_string(i);
+            glUniform1i(glGetUniformLocation(shader->shaderProgram, skyboxid.c_str()), texCount + i);
+            glActiveTexture(GL_TEXTURE0 + texCount + i);
+            glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture[i]); 
+        }
+    
+
+        
         glBindVertexArray(VAO);
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

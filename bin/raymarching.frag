@@ -1,19 +1,4 @@
 
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 // Created by inigo quilez - iq/2013
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
 
@@ -363,7 +348,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     fragColor=vec4( col, 1.0 );
 }
 
-void main()
-{
-    mainImage( fragColor, fragCoord );
-}

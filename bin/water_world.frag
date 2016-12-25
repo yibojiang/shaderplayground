@@ -1,21 +1,4 @@
 
-
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
-
 #ifdef GL_ES
 precision highp float;
 #endif
@@ -38,7 +21,7 @@ vec3 lig = normalize(vec3(-0.8,0.6,-0.2));
 float time = iGlobalTime + 350.;
 
 float noise(float t) {
-	return texture(iChannel0,vec2(t,.0)/256).x;
+	return texture(iChannel15,vec2(t,.0)/256).x;
 }
 
 float noise( in vec2 x ) {
@@ -382,8 +365,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 	
     fragColor = vec4( col, 1.0 );
 }
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}
-

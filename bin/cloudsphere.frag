@@ -1,23 +1,4 @@
 
-
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
-
-
-
 #define LOD false
 // Created by inigo quilez - iq/2013
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -45,15 +26,15 @@ float iqhash( float n )
 
 float noise( in vec3 x )
 {
-    float freq = iGlobalTime;
-    x = x - vec3(freq);
     vec3 p = floor(x);
     vec3 f = fract(x);
     f = f*f*(3.0-2.0*f);
     vec2 uv = (p.xy+vec2(37.0,17.0)*p.z) + f.xy;
-    vec2 rg = texture( iChannel0, (uv+ 0.5)/256.0, -100.0 ).yx;
-    // return -1.0+2.0*mix( rg.x, rg.y, f.z );
-    return mix( rg.x, rg.y, f.z );
+    // vec2 rg = texture( iChannel15, (uv+ 0.5)/256.0, -100.0 ).yx;
+    mat2 mt = mat2(1, 0, 0, -1);
+    vec2 rg = texture2D( iChannel15, (mt*uv+ 0.5)/256.0).yx;
+    // vec2 rg = texture2D( iChannel15, uv/256.0).yx;
+    return -1.0+2.0*mix( rg.x, rg.y, f.z );
 }
 
 float map5( in vec3 p )
@@ -210,8 +191,4 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 //     fragColor = render( fragRayOri, fragRayDir );
 // }
 
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}
 

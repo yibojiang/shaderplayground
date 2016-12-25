@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 
 // #ifdef GL_ES
 // precision mediump float;
@@ -41,7 +27,9 @@ vec3 simplexGrid (vec2 st) {
     return fract(xyz);
 }
 
-void main() {
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+
     vec2 st = fragCoord.xy / iResolution.xy;
     vec3 color = vec3(0.0);
 

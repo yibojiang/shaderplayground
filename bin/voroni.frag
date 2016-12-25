@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 // Clean Voronoi Column Tracing
 // by Tomasz Dobrowolski'2016 CC BY-SA
 
@@ -63,7 +49,7 @@ vec2 hash22(vec2 p)
    //p3 += dot(p3, p3.yzx+19.19);
    //return fract(vec2((p3.x + p3.y)*p3.z, (p3.x+p3.z)*p3.y))*.9+.05;
     // Texture-based
-   return texture( iChannel0, (p+0.5)/256.0, -100.0 ).xy;
+   return texture( iChannel15, (p+0.5)/256.0, -100.0 ).xy;
 #elif 0
    // Dave Hoskins hash with animation
    vec3 p3 = fract(vec3(p.xyx) * vec3(.1031, .1030, .0973));
@@ -72,7 +58,7 @@ vec2 hash22(vec2 p)
    return sin(iGlobalTime*ANIM_SPEED + v*6.283185)*.45 + .5;
 #else
    // Texture-based
-   vec2 v = texture( iChannel0, (p+0.5)/256.0, -100.0 ).xy;
+   vec2 v = texture( iChannel15, (p+0.5)/256.0, -100.0 ).xy;
    return sin(iGlobalTime*ANIM_SPEED + 6.283185*v)*.45 + .5;
 #endif
 }
@@ -493,7 +479,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
    fragColor = vec4(color, 1.);
 }
 
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}

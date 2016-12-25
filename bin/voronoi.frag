@@ -1,18 +1,3 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 
 // Created by inigo quilez - iq/2013
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
@@ -32,7 +17,7 @@ out vec4 fragColor;
 vec2 hash2( vec2 p )
 {
   // texture based white noise
-  return texture( iChannel0, (p + 0.5) / 256.0, -100.0 ).xy;
+  return texture( iChannel15, (p + 0.5) / 256.0, -100.0 ).xy;
 
   // procedural white noise
   //return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
@@ -111,7 +96,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   fragColor = vec4(col, 1.0);
 }
 
-void main()
-{
-  mainImage(fragColor, fragCoord);
-}

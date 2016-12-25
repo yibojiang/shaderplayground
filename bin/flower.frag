@@ -1,15 +1,4 @@
 
-
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D ourTexture;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-out vec4 fragColor;
-
 #define pi 3.1415926
 #define flyCount 40
 
@@ -105,7 +94,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 }
 
 
-void main()
-{
-	mainImage( fragColor, fragCoord );
-}

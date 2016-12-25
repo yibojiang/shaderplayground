@@ -1,21 +1,4 @@
 
-
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
-
 //yibojiang
 /*
 I made serveral explosion pattern.
@@ -61,7 +44,7 @@ vec2 hash2(vec2 p)
 }
 
 vec2 noise(vec2 tc) {
-  return (2*texture(iChannel0, tc.xy ).xy - 1.).xy;
+  return (2*texture(iChannel15, tc.xy ).xy - 1.).xy;
 }
 
 float rand(vec2 c) {
@@ -606,10 +589,5 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
   //col=mix(vec3(1.),col,smoothstep(ll,ll+0.01, p.y) );
   fragColor = vec4(col, 0.  );
 
-}
-
-void main()
-{
-    mainImage(fragColor, fragCoord);
 }
 

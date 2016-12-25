@@ -1,19 +1,3 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
-
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
-
 // Where the River Goes
 // @P_Malin
 
@@ -21,7 +5,7 @@ out vec4 fragColor;
 
 // Placeholder audio https://www.youtube.com/watch?v=gmar4gh5nIw suggested by @qthund on twitter
 
-// #define ENABLE_ULTRA_QUALITY
+//#define ENABLE_ULTRA_QUALITY
 
 #define ENABLE_WATER
 #define ENABLE_FOAM
@@ -30,11 +14,11 @@ out vec4 fragColor;
 
 
 // Textureless version
-#define ENABLE_NIMITZ_TRIANGLE_NOISE
+//#define ENABLE_NIMITZ_TRIANGLE_NOISE
 
 //#define ENABLE_LANDSCAPE_RECEIVE_SHADOW
 
-// #define ENABLE_SCREENSHOT_MODE
+//#define ENABLE_SCREENSHOT_MODE
 const float k_screenshotTime = 13.0;
 
 #if defined(ENABLE_SCREENSHOT_MODE) || defined(ENABLE_ULTRA_QUALITY)
@@ -85,39 +69,39 @@ const float k_fFarClip = 20.0;
 float Hash( float p ) 
 {
     // https://www.shadertoy.com/view/4djSRW - Dave Hoskins
-	vec2 p2 = fract(vec2(p) * MOD2);
+    vec2 p2 = fract(vec2(p) * MOD2);
     p2 += dot(p2.yx, p2.xy+19.19);
-	return fract(p2.x * p2.y);    
-	//return fract(sin(n)*43758.5453);
+    return fract(p2.x * p2.y);    
+    //return fract(sin(n)*43758.5453);
 }
 
 float SmoothNoise(in vec2 o) 
 {
-	vec2 p = floor(o);
-	vec2 f = fract(o);
-		
-	float n = p.x + p.y*57.0;
+    vec2 p = floor(o);
+    vec2 f = fract(o);
+        
+    float n = p.x + p.y*57.0;
 
-	float a = Hash(n+  0.0);
-	float b = Hash(n+  1.0);
-	float c = Hash(n+ 57.0);
-	float d = Hash(n+ 58.0);
-	
-	vec2 f2 = f * f;
-	vec2 f3 = f2 * f;
-	
-	vec2 t = 3.0 * f2 - 2.0 * f3;
-	
-	float u = t.x;
-	float v = t.y;
+    float a = Hash(n+  0.0);
+    float b = Hash(n+  1.0);
+    float c = Hash(n+ 57.0);
+    float d = Hash(n+ 58.0);
+    
+    vec2 f2 = f * f;
+    vec2 f3 = f2 * f;
+    
+    vec2 t = 3.0 * f2 - 2.0 * f3;
+    
+    float u = t.x;
+    float v = t.y;
 
-	float res = a + (b-a)*u +(c-a)*v + (a-b+d-c)*u*v;
+    float res = a + (b-a)*u +(c-a)*v + (a-b+d-c)*u*v;
     
     return res;
 }
 
 float FBM( vec2 p, float ps ) {
-	float f = 0.0;
+    float f = 0.0;
     float tot = 0.0;
     float a = 1.0;
     for( int i=0; i<k_fmbSteps; i++)
@@ -131,7 +115,7 @@ float FBM( vec2 p, float ps ) {
 }
 
 float FBM_Simple( vec2 p, float ps ) {
-	float f = 0.0;
+    float f = 0.0;
     float tot = 0.0;
     float a = 1.0;
     for( int i=0; i<3; i++)
@@ -146,37 +130,37 @@ float FBM_Simple( vec2 p, float ps ) {
 
 vec3 SmoothNoise_DXY(in vec2 o) 
 {
-	vec2 p = floor(o);
-	vec2 f = fract(o);
-		
-	float n = p.x + p.y*57.0;
+    vec2 p = floor(o);
+    vec2 f = fract(o);
+        
+    float n = p.x + p.y*57.0;
 
-	float a = Hash(n+  0.0);
-	float b = Hash(n+  1.0);
-	float c = Hash(n+ 57.0);
-	float d = Hash(n+ 58.0);
-	
-	vec2 f2 = f * f;
-	vec2 f3 = f2 * f;
-	
-	vec2 t = 3.0 * f2 - 2.0 * f3;
-	vec2 dt = 6.0 * f - 6.0 * f2;
-	
-	float u = t.x;
-	float v = t.y;
-	float du = dt.x;	
-	float dv = dt.y;	
-
-	float res = a + (b-a)*u +(c-a)*v + (a-b+d-c)*u*v;
+    float a = Hash(n+  0.0);
+    float b = Hash(n+  1.0);
+    float c = Hash(n+ 57.0);
+    float d = Hash(n+ 58.0);
     
-	float dx = (b-a)*du + (a-b+d-c)*du*v;
-	float dy = (c-a)*dv + (a-b+d-c)*u*dv;    
+    vec2 f2 = f * f;
+    vec2 f3 = f2 * f;
+    
+    vec2 t = 3.0 * f2 - 2.0 * f3;
+    vec2 dt = 6.0 * f - 6.0 * f2;
+    
+    float u = t.x;
+    float v = t.y;
+    float du = dt.x;    
+    float dv = dt.y;    
+
+    float res = a + (b-a)*u +(c-a)*v + (a-b+d-c)*u*v;
+    
+    float dx = (b-a)*du + (a-b+d-c)*du*v;
+    float dy = (c-a)*dv + (a-b+d-c)*u*dv;    
     
     return vec3(dx, dy, res);
 }
 
 vec3 FBM_DXY( vec2 p, vec2 flow, float ps, float df ) {
-	vec3 f = vec3(0.0);
+    vec3 f = vec3(0.0);
     float tot = 0.0;
     float a = 1.0;
     //flow *= 0.6;
@@ -266,7 +250,7 @@ vec3 GetFlowRate( const vec2 vPos )
     
     float fFoam = 0.0;
 
-	float fDepth = -GetTerrainHeightSimple( vec3(vPos.x, 0.0, vPos.y) );
+    float fDepth = -GetTerrainHeightSimple( vec3(vPos.x, 0.0, vPos.y) );
     float fDist = GetFlowDistance( vPos );
     vec2 vGradient = GetGradient( vPos );
     
@@ -287,7 +271,7 @@ vec3 GetFlowRate( const vec2 vPos )
     float fFoamScale2 = 0.35;
     
     fFoam = abs(length( vFlow )) * fFoamScale1;// - length( vBaseFlow ));
-	fFoam += clamp( fFoam - fFoamCutoff, 0.0, 1.0 );
+    fFoam += clamp( fFoam - fFoamCutoff, 0.0, 1.0 );
     //fFoam = fFoam* fFoam;
     fFoam = 1.0 - pow( fDist, fFoam * fFoamScale2 );
     //fFoam = fFoam / fDist;
@@ -297,7 +281,7 @@ vec3 GetFlowRate( const vec2 vPos )
 vec4 SampleWaterNormal( vec2 vUV, vec2 vFlowOffset, float fMag, float fFoam )
 {    
     vec2 vFilterWidth = max(abs(dFdx(vUV)), abs(dFdy(vUV)));
-  	float fFilterWidth= max(vFilterWidth.x, vFilterWidth.y);
+    float fFilterWidth= max(vFilterWidth.x, vFilterWidth.y);
     
     float fScale = (1.0 / (1.0 + fFilterWidth * fFilterWidth * 2000.0));
     float fGradientAscent = 0.25 + (fFoam * -1.5);
@@ -344,34 +328,34 @@ vec4 SampleFlowingNormal( const vec2 vUV, const vec2 vFlowRate, const float fFoa
 
 vec2 GetWindowCoord( const in vec2 vUV )
 {
-	vec2 vWindow = vUV * 2.0 - 1.0;
-	vWindow.x *= iResolution.x / iResolution.y;
+    vec2 vWindow = vUV * 2.0 - 1.0;
+    vWindow.x *= iResolution.x / iResolution.y;
 
-	return vWindow;	
+    return vWindow; 
 }
 
 vec3 GetCameraRayDir( const in vec2 vWindow, const in vec3 vCameraPos, const in vec3 vCameraTarget )
 {
-	vec3 vForward = normalize(vCameraTarget - vCameraPos);
-	vec3 vRight = normalize(cross(vec3(0.0, 1.0, 0.0), vForward));
-	vec3 vUp = normalize(cross(vForward, vRight));
-							  
-	vec3 vDir = normalize(vWindow.x * vRight + vWindow.y * vUp + vForward * 2.0);
+    vec3 vForward = normalize(vCameraTarget - vCameraPos);
+    vec3 vRight = normalize(cross(vec3(0.0, 1.0, 0.0), vForward));
+    vec3 vUp = normalize(cross(vForward, vRight));
+                              
+    vec3 vDir = normalize(vWindow.x * vRight + vWindow.y * vUp + vForward * 2.0);
 
-	return vDir;
+    return vDir;
 }
 
 vec3 ApplyVignetting( const in vec2 vUV, const in vec3 vInput )
 {
-	vec2 vOffset = (vUV - 0.5) * sqrt(2.0);
-	
-	float fDist = dot(vOffset, vOffset);
-	
-	const float kStrength = 0.8;
-	
-	float fShade = mix( 1.0, 1.0 - kStrength, fDist );	
+    vec2 vOffset = (vUV - 0.5) * sqrt(2.0);
+    
+    float fDist = dot(vOffset, vOffset);
+    
+    const float kStrength = 0.8;
+    
+    float fShade = mix( 1.0, 1.0 - kStrength, fDist );  
 
-	return vInput * fShade;
+    return vInput * fShade;
 }
 
 vec3 ApplyTonemap( const in vec3 vLinear )
@@ -380,14 +364,14 @@ vec3 ApplyTonemap( const in vec3 vLinear )
     
     fExposure *= 1.25;
     
-	return 1.0 - exp2(vLinear * -fExposure);	
+    return 1.0 - exp2(vLinear * -fExposure);    
 }
 
 vec3 ApplyGamma( const in vec3 vLinear )
 {
-	const float kGamma = 2.2;
+    const float kGamma = 2.2;
 
-	return pow(vLinear, vec3(1.0/kGamma));	
+    return pow(vLinear, vec3(1.0/kGamma));  
 }
 
 struct Intersection
@@ -471,7 +455,7 @@ vec3 GetSceneNormal(const in vec3 vPos)
     vec3 vDir1 = vec3( 1.0, 0.0, -1.0);
     vec3 vDir2 = vec3(-1.0, 0.0,  1.0);
     vec3 vDir3 = vec3(-1.0, 0.0, -1.0);
-	
+    
     vec3 vOffset1 = vDir1 * fDelta;
     vec3 vOffset2 = vDir2 * fDelta;
     vec3 vOffset3 = vDir3 * fDelta;
@@ -496,7 +480,7 @@ vec3 GetSceneNormal(const in vec3 vPos)
 
 void TraceWater( vec3 vRayOrigin, vec3 vRayDir, out Intersection intersection )
 {
- 	intersection.m_dist = k_fFarClip;
+    intersection.m_dist = k_fFarClip;
     
     float t = -vRayOrigin.y / vRayDir.y;
     if ( t > 0.0 )
@@ -526,21 +510,21 @@ vec3 tri3(in vec3 p){return vec3( tri(p.z+tri(p.y)), tri(p.z+tri(p.x)), tri(p.y+
 float triNoise(in vec3 p)
 {
     float z=1.4;
-	float rz = 0.;
+    float rz = 0.;
     vec3 bp = p;
-	for (float i=0.; i<=4.; i++ )
-	{
+    for (float i=0.; i<=4.; i++ )
+    {
         vec3 dg = tri3(bp*2.);
         p += dg;
 
         bp *= 1.8;
-		z *= 1.5;
-		p *= 1.2;
+        z *= 1.5;
+        p *= 1.2;
            
         rz+= (tri(p.z+tri(p.x+tri(p.y))))/z;
         bp += 0.14;
-	}
-	return rz;
+    }
+    return rz;
 }    
 #endif
     
@@ -551,7 +535,7 @@ void GetSurfaceInfo( Intersection intersection, out Surface surface )
 
 #ifdef ENABLE_NIMITZ_TRIANGLE_NOISE
     vec3 vNoisePos = surface.m_pos * vec3(0.4, 0.3, 1.0);
-	surface.m_normal = normalize(surface.m_normal +triNoise(vNoisePos));
+    surface.m_normal = normalize(surface.m_normal +triNoise(vNoisePos));
     float fNoise = triNoise(vNoisePos);
     fNoise = pow( fNoise, 0.15);
     surface.m_albedo = mix(vec3(.7,.8,.95), vec3(.1, .1,.05), fNoise );    
@@ -563,11 +547,11 @@ void GetSurfaceInfo( Intersection intersection, out Surface surface )
     vec3 vWeights = surface.m_normal * surface.m_normal;
     vec3 col = vec3(0.0);
     vec3 sample;
-    sample = texture2D( iChannel0, intersection.m_pos.xz ).rgb;
+    sample = texture2D( iChannel5, intersection.m_pos.xz ).rgb;
     col += sample * sample * vWeights.y;
-    sample = texture2D( iChannel0, intersection.m_pos.xy ).rgb;
+    sample = texture2D( iChannel5, intersection.m_pos.xy ).rgb;
     col += sample * sample * vWeights.z;
-    sample = texture2D( iChannel0, intersection.m_pos.yz ).rgb;
+    sample = texture2D( iChannel5, intersection.m_pos.yz ).rgb;
     col += sample * sample * vWeights.x;
     col /= vWeights.x + vWeights.y + vWeights.z;
     surface.m_albedo = col;
@@ -581,7 +565,7 @@ void GetSurfaceInfo( Intersection intersection, out Surface surface )
    
 float GIV( float dotNV, float k)
 {
-	return 1.0 / ((dotNV + 0.0001) * (1.0 - k)+k);
+    return 1.0 / ((dotNV + 0.0001) * (1.0 - k)+k);
 }
 
 float GetSunShadow( const vec3 vPos )
@@ -605,29 +589,29 @@ void AddSunLight( Surface surf, const vec3 vViewDir, const float fShadowFactor, 
 {
     vec3 vSunDir = GetSunDir();
 
-	vec3 vH = normalize( vViewDir + vSunDir );
-	float fNdotL = clamp(dot(GetSunDir(), surf.m_normal), 0.0, 1.0);
-	float fNdotV = clamp(dot(vViewDir, surf.m_normal), 0.0, 1.0);
-	float fNdotH = clamp(dot(surf.m_normal, vH), 0.0, 1.0);
+    vec3 vH = normalize( vViewDir + vSunDir );
+    float fNdotL = clamp(dot(GetSunDir(), surf.m_normal), 0.0, 1.0);
+    float fNdotV = clamp(dot(vViewDir, surf.m_normal), 0.0, 1.0);
+    float fNdotH = clamp(dot(surf.m_normal, vH), 0.0, 1.0);
     
     float diffuseIntensity = fNdotL;
     
     vDiffuse += g_sunColour * diffuseIntensity * fShadowFactor;
-	//vDiffuse = fShadowFactor * vec3(100.0);
-	
-	float alpha = 1.0 - surf.m_gloss;
-	// D
+    //vDiffuse = fShadowFactor * vec3(100.0);
+    
+    float alpha = 1.0 - surf.m_gloss;
+    // D
 
-	float alphaSqr = alpha * alpha;
-	float pi = 3.14159;
-	float denom = fNdotH * fNdotH * (alphaSqr - 1.0) + 1.0;
-	float d = alphaSqr / (pi * denom * denom);
+    float alphaSqr = alpha * alpha;
+    float pi = 3.14159;
+    float denom = fNdotH * fNdotH * (alphaSqr - 1.0) + 1.0;
+    float d = alphaSqr / (pi * denom * denom);
 
-	float k = alpha / 2.0;
-	float vis = GIV(fNdotL, k) * GIV(fNdotV, k);
+    float k = alpha / 2.0;
+    float vis = GIV(fNdotL, k) * GIV(fNdotV, k);
 
-	float fSpecularIntensity = d * vis * fNdotL;
-	vSpecular += g_sunColour * fSpecularIntensity * fShadowFactor;
+    float fSpecularIntensity = d * vis * fNdotL;
+    vSpecular += g_sunColour * fSpecularIntensity * fShadowFactor;
 }
     
 void AddSkyLight( Surface surf, inout vec3 vDiffuse, inout vec3 vSpecular )
@@ -655,7 +639,7 @@ vec3 GetWaterExtinction( float dist )
 
 vec3 GetSkyColour( vec3 vRayDir )
 {    
-	vec3 vSkyColour = mix( k_bgSkyColourDown, k_bgSkyColourUp, clamp( vRayDir.y, 0.0, 1.0 ) );
+    vec3 vSkyColour = mix( k_bgSkyColourDown, k_bgSkyColourUp, clamp( vRayDir.y, 0.0, 1.0 ) );
     float fSunDotV = dot(GetSunDir(), vRayDir);    
     float fDirDot = clamp(fSunDotV * 0.5 + 0.5, 0.0, 1.0);
     vSkyColour += g_sunColour * (1.0 - exp2(fDirDot * -0.5)) * 2.0;
@@ -665,7 +649,7 @@ vec3 GetSkyColour( vec3 vRayDir )
 
 vec3 GetEnvColour( vec3 vRayDir, float fGloss )
 {
-	return mix( k_envFloorColor, k_bgSkyColourUp, clamp( vRayDir.y * (1.0 - fGloss * 0.5) * 0.5 + 0.5, 0.0, 1.0 ) );
+    return mix( k_envFloorColor, k_bgSkyColourUp, clamp( vRayDir.y * (1.0 - fGloss * 0.5) * 0.5 + 0.5, 0.0, 1.0 ) );
 }
 
 
@@ -691,13 +675,13 @@ vec3 GetRayColour( const in vec3 vRayOrigin, const in vec3 vRayDir, out Intersec
 
 vec3 GetRayColour( const in vec3 vRayOrigin, const in vec3 vRayDir )
 {
-	Intersection intersection;
+    Intersection intersection;
     return GetRayColour( vRayOrigin, vRayDir, intersection );
 }
 
 vec3 GetSceneColour( const in vec3 vRayOrigin,  const in vec3 vRayDir )
 {
-	Intersection primaryInt;
+    Intersection primaryInt;
     RaymarchScene( vRayOrigin, vRayDir, primaryInt );
 
      float fFogDistance = 0.0;
@@ -770,7 +754,7 @@ vec3 GetSceneColour( const in vec3 vRayOrigin,  const in vec3 vRayDir )
             specSurface.m_specR0 = vec3( 0.01, 0.01, 0.01 );
 
             vec2 vFilterWidth = max(abs(dFdx(waterInt.m_pos.xz)), abs(dFdy(waterInt.m_pos.xz)));
-  			float fFilterWidth= max(vFilterWidth.x, vFilterWidth.y);
+            float fFilterWidth= max(vFilterWidth.x, vFilterWidth.y);
             float fGlossFactor = exp2( -fFilterWidth * 0.3 );
             specSurface.m_gloss = 0.99 * fGlossFactor;            
             specSurface.m_specScale = 1.0;
@@ -860,9 +844,9 @@ void BlockRender(in vec2 fragCoord)
     float blockY = fract(floor(frame / blockRes.x) / blockRes.y) * blockRes.y;
     // Don't draw anything outside the current block.
     if ((fragCoord.x - blockX * blockSize >= blockSize) ||
-    	(fragCoord.x - (blockX - 1.0) * blockSize < blockSize) ||
-    	(fragCoord.y - blockY * blockSize >= blockSize) ||
-    	(fragCoord.y - (blockY - 1.0) * blockSize < blockSize))
+        (fragCoord.x - (blockX - 1.0) * blockSize < blockSize) ||
+        (fragCoord.y - blockY * blockSize >= blockSize) ||
+        (fragCoord.y - (blockY - 1.0) * blockSize < blockSize))
     {
         discard;
     }
@@ -882,12 +866,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float fCameraTime = g_fTime;
     
-	// Static camera locations
+    // Static camera locations
     //fCameraTime = 146.0; // some rocks
     
     vec2 vUV = fragCoord.xy / iResolution.xy;
 
-	vec3 vCameraTarget = vec3(0.0, -0.5, 0.0);
+    vec3 vCameraTarget = vec3(0.0, -0.5, 0.0);
 
     vCameraTarget.x -= fCameraTime * 0.5;
     
@@ -913,12 +897,12 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vCameraPos.y = max( vCameraPos.y, GetTerrainHeightSimple( vCameraPos ) + 0.2 );
     
     vec3 vRayOrigin = vCameraPos;
-	vec3 vRayDir = GetCameraRayDir( GetWindowCoord(vUV), vCameraPos, vCameraTarget );
-	
+    vec3 vRayDir = GetCameraRayDir( GetWindowCoord(vUV), vCameraPos, vCameraTarget );
+    
 #ifndef ENABLE_SUPERSAMPLE_MODE
-	vec3 vResult = GetSceneColour(vRayOrigin, vRayDir);
+    vec3 vResult = GetSceneColour(vRayOrigin, vRayDir);
 #else
-	vec3 vResult = vec3(0.0);
+    vec3 vResult = vec3(0.0);
     float fTot = 0.0;
     for(int i=0; i<k_superSampleCount; i++)
     {
@@ -930,19 +914,19 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         vRandom = normalize( vRandom );
         vCurrRayDir += vRandom * 0.001;
         vCurrRayDir = normalize(vCurrRayDir);
-    	vResult += GetSceneColour(vRayOrigin, vCurrRayDir);
+        vResult += GetSceneColour(vRayOrigin, vCurrRayDir);
         fTot += 1.0;
     }
     vResult /= fTot;
 #endif    
     
-	vResult = ApplyVignetting( vUV, vResult );	
-	
-	vec3 vFinal = ApplyGamma(ApplyTonemap(vResult));
-	
+    vResult = ApplyVignetting( vUV, vResult );  
+    
+    vec3 vFinal = ApplyGamma(ApplyTonemap(vResult));
+    
     vFinal = vFinal * 1.1 - 0.1;
     
-	fragColor = vec4(vFinal, 1.0);
+    fragColor = vec4(vFinal, 1.0);
 }
 
 void mainVR( out vec4 fragColor, in vec2 fragCoord, in vec3 fragRayOri, in vec3 fragRayDir )
@@ -965,14 +949,9 @@ void mainVR( out vec4 fragColor, in vec2 fragCoord, in vec3 fragRayOri, in vec3 
     
     vec3 vResult = GetSceneColour(fragRayOri, fragRayDir);
     
-	vec3 vFinal = ApplyGamma(ApplyTonemap(vResult));
-	
+    vec3 vFinal = ApplyGamma(ApplyTonemap(vResult));
+    
     vFinal = vFinal * 1.1 - 0.1;
     
-	fragColor = vec4(vFinal, 1.0);    
-}
-
-void main()
-{
-    mainImage( fragColor, fragCoord );
+    fragColor = vec4(vFinal, 1.0);    
 }

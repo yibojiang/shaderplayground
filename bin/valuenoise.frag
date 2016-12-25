@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 // By Morgan McGuire @morgan3d, http://graphicscodex.com
 // Reuse permitted under the BSD license.
 
@@ -186,7 +172,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 	fragColor.rgb = pow(v, 0.35) * 1.3 * normalize(vec3(0.5, fragCoord.xy / iResolution.xy)) + vec3(v * 0.25);
 }
 
-void main()
-{
-    mainImage(fragColor, fragCoord);
-}
