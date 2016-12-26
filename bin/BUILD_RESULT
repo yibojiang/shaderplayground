@@ -1,12 +1,12 @@
 argc = 4
 argv[0] = ./playground
-argv[1] = /Users/admin/Documents/Programming/shaderplayground/bin/simplex.frag
-argv[2] = 640
-argv[3] = 480
-Size:640, 480
-compile shader /Users/admin/Documents/Programming/shaderplayground/bin/simplex.frag
+argv[1] = /Users/admin/Documents/Programming/shaderplayground/bin/multiple_transparency.frag
+argv[2] = 400
+argv[3] = 280
+Size:400, 280
+compile shader /Users/admin/Documents/Programming/shaderplayground/bin/multiple_transparency.frag
 Starting GLFW context, OpenGL 3.3
-Current dir: /Users/admin/Documents/Programming/shaderplayground/binopening
+opening
 loading image: tex01.jpg
 Image loaded
 image is loaded
@@ -70,5 +70,47 @@ image is loaded
 loading image: tex21.png
 Image loaded
 image is loaded
+loading image: cube00/
+Image not of any known type, or corrupt
+loading image: cube00/
+Image not of any known type, or corrupt
+loading image: cube00/
+Image not of any known type, or corrupt
+loading image: cube00/
+Image not of any known type, or corrupt
+loading image: cube00/
+Image not of any known type, or corrupt
+loading image: cube00/
+Image not of any known type, or corrupt
+loading image: cube01/
+Image not of any known type, or corrupt
+loading image: cube01/
+Image not of any known type, or corrupt
+loading image: cube01/
+Image not of any known type, or corrupt
+loading image: cube01/
+Image not of any known type, or corrupt
+loading image: cube01/
+Image not of any known type, or corrupt
+loading image: cube01/
+Image not of any known type, or corrupt
+loading image: cube02/
+Image not of any known type, or corrupt
+loading image: cube02/
+Image not of any known type, or corrupt
+loading image: cube02/
+Image not of any known type, or corrupt
+loading image: cube02/
+Image not of any known type, or corrupt
+loading image: cube02/
+Image not of any known type, or corrupt
+loading image: cube02/
+Image not of any known type, or corrupt
+58.8235 ms/frame
+40 ms/frame
+47.619 ms/frame
+62.5 ms/frame
+62.5 ms/frame
+58.8235 ms/frame
 
-[Finished in 1.5s]
+[Finished in 7.5s]

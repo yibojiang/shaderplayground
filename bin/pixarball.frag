@@ -237,7 +237,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
     if ( res.y == 0.0 ) {
       difftex = mod( floor( hit.x * 2.0 ) + floor( hit.z * 2.0 ), 2.0 ) * vec3( 0.7 );
       sepctex = vec3( 0.0 );
-      // difftex = texture( iChannel1, vec2( hit.x , hit.z ) ).xyz;
+      difftex = texture( iChannel4, vec2( hit.x , hit.z ) ).xyz;
       //difftex = vec3( 0.4 );
     }
     else if ( res.y == 1.0 ) {
@@ -266,7 +266,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
         difftex = vec3( 0.0, 0.4, 0.8 );
       }
 
-      // difftex += 0.2 * textureCube( iChannel2, reflect( -rd, n ) ).xyz;
+      difftex += 0.2 * textureCube( skybox1, reflect( -rd, n ) ).xyz;
       sepctex = vec3( 1.0 );
     }
 

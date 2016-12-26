@@ -911,8 +911,9 @@ float GetDistanceWine( vec3 vPos )
     
     vWaterNormal = normalize( vWaterNormal );
     float fWaterLevel = dot(vLocalPos, vWaterNormal) - 0.1;
-        
+    
     return max( fBowlDistance, fWaterLevel );
+
 }
 
 float GetDistanceWineGlass( vec3 vPos )
@@ -949,7 +950,7 @@ float GetDistanceWineGlass( vec3 vPos )
     
     fDistance = max( fDistance, vSphPos.y - 0.5 );
         
-    return fDistance;
+    return fBowlDistance;
 }
 
 float GetDistanceBowl( vec3 vPos )
@@ -1034,7 +1035,7 @@ SceneResult Scene_GetDistance( const vec3 vPos, const float fInsideObject )
     glassResult.vUVW = vPos.xzy;
     glassResult.fDist = min( glassResult.fDist, GetDistanceWineGlass(vPos - vWineGlassPos ) );    
 
-    //glassResult.fDist = min( glassResult.fDist, GetDistanceMug(vPos - vec3(-2.0, 1.0, -2.0) ) );    
+    // glassResult.fDist = min( glassResult.fDist, GetDistanceMug(vPos - vec3(-2.0, 1.0, -2.0) ) );    
 
     Scene_Trim( wineResult, glassResult );
     wineResult.fDist -= 0.0001;
@@ -1050,7 +1051,7 @@ SceneResult Scene_GetDistance( const vec3 vPos, const float fInsideObject )
     }
         
     Scene_Union( result, glassResult );
-    Scene_Union( result, wineResult );
+    // Scene_Union( result, wineResult );
     
     return result;
 }

@@ -52,7 +52,7 @@ double mousexPos, mouseyPos;
 struct Vector{ float x,y,z; };
 
 
-GLuint loadCubemap(vector<const GLchar*> faces);
+GLuint loadCubemap(vector<string> faces);
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mousemove_callback(GLFWwindow* window, double xPos, double yPos);
@@ -93,7 +93,7 @@ void mouse_callback(GLFWwindow *window, int button, int action, int mods)
     cout << mousexPos << ", " << mouseyPos << endl;
 }
 
-GLuint loadCubemap(vector<const GLchar*> faces)
+GLuint loadCubemap(vector<string> faces)
 {
     GLuint textureID;
     glGenTextures(1, &textureID);
@@ -104,7 +104,7 @@ GLuint loadCubemap(vector<const GLchar*> faces)
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     for(GLuint i = 0; i < faces.size(); i++)
     {
-        image = SOIL_load_image(faces[i], &width, &height, 0, SOIL_LOAD_RGB);
+        image = SOIL_load_image(faces[i].c_str(), &width, &height, 0, SOIL_LOAD_RGB);
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         SOIL_free_image_data(image);
 
@@ -183,9 +183,9 @@ int main(int argc, char** argv)
     
     // chdir(argv[0]);
     // chdir("/");
-    chdir("/Users/yjiang6/Documents/Programming/shaderplayground/build/src/playground");
-    char * dir = getcwd(NULL, 0); 
-    printf("Current dir: %s", dir);
+    // chdir("/Users/yjiang6/Documents/Programming/shaderplayground/build/src/playground");
+    // char * dir = getcwd(NULL, 0); 
+    // printf("Current dir: %s", dir);
     shader = new Shader("v.vert", fragpath);
     
     // Vertex Buffer Object and Vertex Array Object
@@ -298,22 +298,20 @@ int main(int argc, char** argv)
     skytexturename[2] = "cube02";skytextureext[2] = "jpg";
 
     for (int i = 0; i < skyboxCount; ++i){
-        vector<const GLchar*> faces;
+        // vector<const GLchar*> faces;
+        vector<string> faces;
+        
 
         for (int j = 0; j < 6; ++j){
+
             char buff[100];
+            snprintf(buff, 100*sizeof(char), "%s/%s_%d.%s", skytexturename[i].c_str(), skytexturename[i].c_str(), j, skytextureext[i].c_str());
             string buffAsStdStr = buff;
-            snprintf(buff, sizeof(buff), "%s/%s_%d.%s", skytexturename[i].c_str(), skytexturename[i].c_str(), j, skytextureext[i].c_str());
-            // string buffAsStdStr = buff;
-            // faces.push_back(buffAsStdStr.c_str());
-            faces.push_back(buff);
+            faces.push_back(buffAsStdStr);
         }
         
-        // GLuint skyboxTexture = loadCubemap(faces);      
         skyboxTexture[i] = loadCubemap(faces);
     }
-    // Cubemap (Skybox)
-    
 
     // GLuint textureID;
     // glGenTextures(1, &textureID);

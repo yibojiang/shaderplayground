@@ -1,18 +1,4 @@
-#version 330 core
-in vec3 vertexColor;
-in vec3 vertexPosition;
-in vec2 fragCoord;
 
-uniform sampler2D iChannel0;
-uniform sampler2D iChannel1;
-uniform sampler2D iChannel2;
-uniform sampler2D iChannel3;
-
-uniform vec4 iDate;
-uniform float iGlobalTime;
-uniform vec2 iResolution;
-uniform vec4 iMouse;
-out vec4 fragColor;
 
 #define precis 0.001
 
@@ -26,10 +12,16 @@ float plane(vec3 p){
 
 float scene(vec3 p){
 	float plane = plane(p-vec3(0,-1,0));
-	float s = sphere(p-vec3(0,0.1+0.3*abs(sin(iGlobalTime)),0), 0.1);
-	return min(plane, s);
+	// float s = sphere(p-vec3(0,0.1+0.3*abs(sin(iGlobalTime)),0), 0.1);
+    vec3 spos = vec3(0,0.1,0);
+    float s = sphere(p-spos, 0.1);
+    float s2 = sphere(p-spos, 0.09);
+    s = max(s, -s2);
+    s = max(s, p.y-0.1);
+    
+	// return min(plane, s);
 	// return plane;
-	// return s;
+	return s;
 }
 
 float castShadow(vec3 ro, vec3 rd){
@@ -118,7 +110,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     float time = iGlobalTime;
     vec2 mo = iMouse.xy/iResolution.xy;
-    vec3 ro = vec3( 1.5*cos(0.1*time + 6.0*mo.x), 1.0 + 2.0*mo.y, 1.5*sin(0.1*time + 6.0*mo.x) );
+    vec3 ro = vec3( 1.0*cos(0.1*time + 6.0*mo.x), 1.0 + 2.0*mo.y, 1.0*sin(0.1*time + 6.0*mo.x) );
     vec3 ta = vec3( 0.0, 0.2, 0.0);
     mat3 ca = setCamera( ro, ta, 0.0 );
   	vec3 rd = ca * normalize( vec3(uv.xy,2.0) );
@@ -131,6 +123,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
   	vec3  lig = normalize( vec3(-0.6, 0.7, -0.5) );
   	float sh = castShadow(pos, lig);
 
+    vec3 envMap = textureCube( skybox2, rd ).rgb;
+    color = envMap;
   	float sun= max(0.0, dot(rd, lig));
     if (res > 0.0){
     	// color = vec3(1.0);
@@ -140,13 +134,15 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 
     	color = dif;
+        
+        color = textureCube( skybox2, reflect( rd, nor)).rgb;
 
     	
     }
     else{
     	// sun flare
-    	color += pow(sun,1.0)*vec3(0.2);
-    	color += pow(sun,5.0)*vec3(1.0);	
+    	// color += pow(sun,1.0)*vec3(0.2);
+    	// color += pow(sun,5.0)*vec3(1.0);	
     }
     
     
@@ -157,7 +153,3 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     fragColor = vec4(color, 1.0);
 }
 
-void main()
-{
-    mainImage( fragColor, fragCoord );
-}
