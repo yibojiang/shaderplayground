@@ -186,7 +186,7 @@ int main(int argc, char** argv)
     // chdir("/Users/yjiang6/Documents/Programming/shaderplayground/build/src/playground");
     // char * dir = getcwd(NULL, 0); 
     // printf("Current dir: %s", dir);
-    shader = new Shader("v.vert", fragpath);
+    
     
     // Vertex Buffer Object and Vertex Array Object
     GLuint VBO, VAO;
@@ -313,6 +313,8 @@ int main(int argc, char** argv)
         skyboxTexture[i] = loadCubemap(faces);
     }
 
+
+    shader = new Shader("v.vert", fragpath);
     // GLuint textureID;
     // glGenTextures(1, &textureID);
     // glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
@@ -420,6 +422,7 @@ int main(int argc, char** argv)
         glfwSwapBuffers(window);
     }
     
+    delete shader;
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);

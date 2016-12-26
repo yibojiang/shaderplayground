@@ -512,10 +512,10 @@ vec3 integrateEnvLight(SurfaceData surf, vec3 tint)
     // of the cube map as roughness goes up and decrease the light
     // contribution as roughness goes up.
     
-    // vec4 specolor = .4 * mix(textureCube(iChannel0, envdir),
-    //                          textureCube(iChannel1, envdir),
-    //                          surf.roughness) * (1. - surf.roughness);
-    vec4 specolor;
+    vec4 specolor = .4 * mix(textureCube(skybox0, envdir),
+                             textureCube(skybox1, envdir),
+                             surf.roughness) * (1. - surf.roughness);
+    // vec4 specolor;
     vec3 envspec = sampleEnvLight(envdir, tint * specolor.rgb, surf);
     return envspec;
 }
