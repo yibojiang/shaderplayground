@@ -19,8 +19,6 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
   string fragmentCode;
   
   // char * dir = getcwd(NULL, 0); // Platform-dependent, see reference link below
-  
-  
 
   
   ifstream vShaderFile(vertexPath, ifstream::in);
@@ -72,6 +70,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
     uniform samplerCube skybox0;
     uniform samplerCube skybox1;
     uniform samplerCube skybox2;
+    uniform samplerCube skybox3;
 
     uniform vec3 iChannelResolution[21];
 
