@@ -289,7 +289,7 @@ int main(int argc, char** argv)
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    int skyboxCount = 4;
+    int skyboxCount = 5;
     GLuint *skyboxTexture = new GLuint[skyboxCount];
     string *skytexturename = new string[skyboxCount];
     string *skytextureext = new string[skyboxCount];
@@ -297,6 +297,7 @@ int main(int argc, char** argv)
     skytexturename[1] = "cube01";skytextureext[1] = "png";
     skytexturename[2] = "cube02";skytextureext[2] = "jpg";
     skytexturename[3] = "cube03";skytextureext[3] = "png";
+    skytexturename[4] = "cube04";skytextureext[4] = "png";
 
     for (int i = 0; i < skyboxCount; ++i){
         // vector<const GLchar*> faces;

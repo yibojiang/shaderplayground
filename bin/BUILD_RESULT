@@ -1,9 +1,9 @@
 argc = 4
 argv[0] = ./playground
 argv[1] = /Users/admin/Documents/Programming/shaderplayground/bin/test.frag
-argv[2] = 400
-argv[3] = 240
-Size:400, 240
+argv[2] = 800
+argv[3] = 480
+Size:800, 480
 compile shader /Users/admin/Documents/Programming/shaderplayground/bin/test.frag
 Starting GLFW context, OpenGL 3.3
 loading image: tex01.jpg
@@ -105,9 +105,21 @@ loading image: cube02/cube02_4.jpg
 Image loaded
 loading image: cube02/cube02_5.jpg
 Image loaded
+loading image: cube03/cube03_0.png
+Image loaded
+loading image: cube03/cube03_1.png
+Image loaded
+loading image: cube03/cube03_2.png
+Image loaded
+loading image: cube03/cube03_3.png
+Image loaded
+loading image: cube03/cube03_4.png
+Image loaded
+loading image: cube03/cube03_5.png
+Image loaded
 opening
 ERROR::SHADER::VERTEX::COMPILATION_FAILED
-ERROR: 0:139: Invalid call of undeclared identifier 'softshadow'
+ERROR: 0:167: Use of undeclared identifier 'coor'
 
 
-[Finished in 1.2s]
+[Finished in 1.6s]

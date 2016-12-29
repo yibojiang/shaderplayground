@@ -13,7 +13,7 @@ float plane(vec3 p){
 float scene(vec3 p){
 	float plane = plane(p-vec3(0,-1,0));
 	// float s = sphere(p-vec3(0,0.1+0.3*abs(sin(iGlobalTime)),0), 0.1);
-    vec3 spos = vec3(0,0.1,0);
+    vec3 spos = vec3(0,0.0,0);
     float s = sphere(p-spos, 0.1);
     float s2 = sphere(p-spos, 0.085);
  //    s = max(s, -s2);
@@ -89,6 +89,8 @@ mat3 setCamera(vec3 ro, vec3  ta, float cr){
 	vec3 cp = vec3(sin(cr), cos(cr),0.0);
 	vec3 cu = normalize(cross(cw,cp));
 	vec3 cv = normalize(cross(cu,cw));
+    // vec3 cu = normalize(cross(cp,cw));
+    // vec3 cv = normalize(cross(cw,cu));
 	return mat3(cu,cv,cw);
 }
 
@@ -124,7 +126,8 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
     float time = iGlobalTime;
     vec2 mo = iMouse.xy/iResolution.xy;
-    vec3 ro = vec3( 1.0*cos(0.1*time + 6.0*mo.x), 1.0 + 2.0*mo.y, 1.0*sin(0.1*time + 6.0*mo.x) );
+    // vec3 ro = vec3( 1.0*cos(0.1*time + 6.0*mo.x), 1.0 + 2.0*mo.y, 1.0*sin(0.1*time + 6.0*mo.x) );
+    vec3 ro = vec3( 0.0, 0.0, -2.0 );
     vec3 ta = vec3( 0.0, 0.2, 0.0);
     mat3 ca = setCamera( ro, ta, 0.0 );
   	vec3 rd = ca * normalize( vec3(uv.xy,2.0) );
@@ -163,8 +166,10 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         color+= 0.4 * textureCube( skybox2, reflect( rd, nor)).rgb;
         color += 0.4 * fre * vec3(1.00, 1.00, 1.00) * occ;
         color+= vec3(1.0,0.9,0.8) * amb * occ;
+        // color = nor;
         // color = pow(color, vec3(0.45));
         // color = vec3(1.0)*fre;
+        color = vec3(1.0) * dif;
     	
     }
     else{
@@ -173,7 +178,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     	// color += pow(sun,5.0)*vec3(1.0);	
     }
     
-    
+
 
     // float sun = sundir + pow(sundir, 2.0);
 
