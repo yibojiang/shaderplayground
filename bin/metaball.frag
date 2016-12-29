@@ -208,7 +208,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         //-----------------------------------------------------
 
         // background
-        vec3 col = pow( textureCube( skybox0, rd ).xyz, vec3(2.2) );
+        vec3 col = pow( textureCube( skybox4, rd ).xyz, vec3(2.2) );
         
         // raymarch
         vec2 tmat = intersect(ro,rd);
@@ -242,7 +242,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
             vec3 lin = vec3(0.0);
             lin += mix( vec3(0.05,0.02,0.0), 1.2*vec3(0.8,0.9,1.0), 0.5 + 0.5*nor.y );
             lin *= 1.0 + 1.5*vec3(0.7,0.5,0.3)*pow( clamp( 1.0 + dot(nor,rd), 0.0, 1.0 ), 2.0 );
-            lin += 1.5*clamp(0.3+2.0*nor.y,0.0,1.0)*pow(textureCube( skybox0, ref ).xyz,vec3(2.2))*(0.04+0.96*pow( clamp( 1.0 + dot(nor,rd), 0.0, 1.0 ), 4.0 ));
+            lin += 1.5*clamp(0.3+2.0*nor.y,0.0,1.0)*pow(textureCube( skybox4, ref ).xyz,vec3(2.2))*(0.04+0.96*pow( clamp( 1.0 + dot(nor,rd), 0.0, 1.0 ), 4.0 ));
 
             // surface-light interacion
             col = lin * mate;

@@ -71,6 +71,7 @@ Shader::Shader(const GLchar* vertexPath, const GLchar* fragmentPath){
     uniform samplerCube skybox1;
     uniform samplerCube skybox2;
     uniform samplerCube skybox3;
+    uniform samplerCube skybox4;
 
     uniform vec3 iChannelResolution[21];
 
