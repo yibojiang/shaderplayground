@@ -306,7 +306,7 @@ vec3 render( in vec3 ro, in vec3 rd )
     lin += 0.30 * bac * vec3(0.25, 0.25, 0.25) * occ;
     lin += 0.40 * fre * vec3(1.00, 1.00, 1.00) * occ;
     col = col * lin;
-
+    
     col = mix( col, vec3(0.8, 0.9, 1.0), 1.0 - exp( -0.002 * t * t ) );
  
   }

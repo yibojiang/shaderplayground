@@ -1,7 +1,7 @@
 
 
 #define precis 0.001
-
+#define pi 3.1415926
 float sphere(vec3 p, float r){
 	return length(p)-r;
 }
@@ -16,6 +16,8 @@ float scene(vec3 p){
     vec3 spos = vec3(0,0.0,0);
     float s = sphere(p-spos, 0.1);
     float s2 = sphere(p-spos, 0.085);
+
+
  //    s = max(s, -s2);
  //    s = max(s, p.y-0.1);
     
@@ -130,7 +132,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 ro = vec3( 0.0, 0.0, -2.0 );
     vec3 ta = vec3( 0.0, 0.2, 0.0);
     mat3 ca = setCamera( ro, ta, 0.0 );
-  	vec3 rd = ca * normalize( vec3(uv.xy,2.0) );
+    float fov = pi/3; // hotirzontal fov 60
+    float near = 2.0/tan(fov/2);
+  	vec3 rd = ca * normalize( vec3(uv.xy,near) );
 
     float res = raymarch(ro, rd);
     vec3 pos = ro + rd*res;
