@@ -1,0 +1,38 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"build_systems":
+	[
+		{
+            "name": "Build",
+            "target": "exec_in_window",            
+            "variants": 
+            [
+            	{ 
+            		"name": "List All Shader",
+                  	"cmd": ["ls -l *.frag"],
+                  	"working_dir": "${project_path:${folder}}/bin",
+                    "shell": true,
+                },
+                { 
+                    "name": "Run Current Shader",
+                    "cmd": ["./playground $file 800 480"],
+                    "working_dir": "${project_path:${folder}}/bin",
+                    "shell": true,
+
+               },
+               { 
+                	"name": "Build C++",
+                  	"cmd": ["make"],
+                    "working_dir": "${project_path:${folder}}/build",
+                    "shell": true,
+               }
+                
+            ]
+		}
+	]
+}

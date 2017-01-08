@@ -82,7 +82,7 @@ vec4 mul_quat(vec4 q1, vec4 q2) {
 vec4 rotate( vec3 p, vec3 axis, float an) {
   vec4 q = eularToQuat( axis, an );
   vec4 qr = inverQuat( q );
-  vec4 pos = vec4( p.xyz, 0.0 );
+  vec4 pos = vec4( p.xyz, 1.0 );
   vec4 tmp = mul_quat( q, pos );
   return mul_quat( tmp, qr );
 }
