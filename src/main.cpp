@@ -108,8 +108,8 @@ GLuint loadCubemap(vector<string> faces)
         glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         SOIL_free_image_data(image);
 
-        cout << "loading image: "<< faces[i] << endl;
-        cout<< SOIL_last_result()<<endl;
+        // cout << "loading image: "<< faces[i] << endl;
+        // cout<< SOIL_last_result()<<endl;
     }
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -266,12 +266,12 @@ int main(int argc, char** argv)
         int texWidth, texHeight;
         unsigned char* image = SOIL_load_image(texturename[i].c_str(), &texWidth, &texHeight, 0, SOIL_LOAD_RGB);
 
-        cout << "loading image: "<< texturename[i] << endl;
-        cout<< SOIL_last_result()<<endl;
+        // cout << "loading image: "<< texturename[i] << endl;
+        // cout<< SOIL_last_result()<<endl;
         if (image == NULL)
-            cout << "image is null" << endl; 
+            cout << texturename[i] << " is null" << endl; 
         else
-            cout << "image is loaded" << endl;
+            cout << texturename[i] << " is loaded" << endl;
     //    The first argument specifies the texture target; setting this to GL_TEXTURE_2D means this operation will generate a texture on the currently bound texture object at the same target (so any textures bound to targets GL_TEXTURE_1D or GL_TEXTURE_3D will not be affected).
     //    The second argument specifies the mipmap level for which we want to create a texture for if you want to set each mipmap level manually, but we'll leave it at the base level which is 0.
     //        The third argument tells OpenGL in what kind of format we want to store the texture. Our image has only RGB values so we'll store the texture with RGB values as well.
