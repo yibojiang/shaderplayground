@@ -268,6 +268,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
       difftex += 0.2 * textureCube( skybox1, reflect( -rd, n ) ).xyz;
       sepctex = vec3( 1.0 );
+      // difftex = vec3(u, v, 0);
     }
 
     //dif = 1.0;

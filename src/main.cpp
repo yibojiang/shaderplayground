@@ -15,7 +15,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <string>
+#include <sstream>
+#include <iomanip>
 #include <vector>
+
+
 
 
 GLfloat vertices[] = {
@@ -47,7 +51,7 @@ using namespace std;
 Shader *shader;
 char* fragpath;
 double mousexPos, mouseyPos;
-
+bool recording;
 
 struct Vector{ float x,y,z; };
 
@@ -65,7 +69,8 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     
     if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
-    
+    if(key == GLFW_KEY_S && action == GLFW_PRESS)
+        recording = !recording;
     if(key == GLFW_KEY_ENTER && action == GLFW_PRESS){
         delete shader;
         shader = new Shader("v.vert", fragpath);
@@ -121,9 +126,17 @@ GLuint loadCubemap(vector<string> faces)
     return textureID;
 }
 
+std::string format(long num, unsigned int length=4) {
+  std::ostringstream oss;
+  oss << std::setfill('0') << std::setw(length) << num;
+  // return oss.str().insert(3, "-").insert(6, "-");
+  return oss.str();
+};
+
 // The MAIN function, from here we start the application and run the game loop
 int main(int argc, char** argv)
 {
+    recording = false;
     cout << "argc = " << argc << endl; 
     for(int i = 0; i < argc; i++) 
         cout << "argv[" << i << "] = " << argv[i] << endl;
@@ -323,6 +336,8 @@ int main(int argc, char** argv)
     
     double lastTime = glfwGetTime();
     int nbFrames =0;
+    int frames =0;
+
     // Game loop
     while (!glfwWindowShouldClose(window))
     {
@@ -330,6 +345,7 @@ int main(int argc, char** argv)
         // If you intend to make a 30fps game, your target will be 33.3333ms. That’s all you need to know.
         double currentTime = glfwGetTime();
         nbFrames++;
+        frames++;
         if ( currentTime - lastTime >= 1.0 ){ // If last prinf() was more than 1 sec ago
             // printf and reset timer
             // printf("%f ms/frame\n", 1000.0/double(nbFrames));
@@ -337,8 +353,6 @@ int main(int argc, char** argv)
             nbFrames = 0;
             lastTime += 1.0;
         }
-
-
 
         // Check if any events have been activiated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
@@ -388,7 +402,6 @@ int main(int argc, char** argv)
         
         
         for (int i = 0; i < texCount; i++ ){
-
             string channelid = "iChannel" + to_string(i);
             // string channelResid = "iChannelResolution" + to_string(i);
             // cout<<"binding channel: "<<channelid<<endl;
@@ -401,27 +414,41 @@ int main(int argc, char** argv)
 
         
         // Now draw the nanosuit
-
-        for (int i = 0; i < skyboxCount; ++i)
-        {
+        for (int i = 0; i < skyboxCount; ++i){
             string skyboxid = "skybox" + to_string(i);
             glUniform1i(glGetUniformLocation(shader->shaderProgram, skyboxid.c_str()), texCount + i);
             glActiveTexture(GL_TEXTURE0 + texCount + i);
             glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTexture[i]); 
         }
-    
-
         
         glBindVertexArray(VAO);
-        
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-        
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        // glDrawArrays(GL_TRIANGLES, 0, 3);
         glBindVertexArray(0);
+
+        if (recording){
+            string outputname = "output/output" + format(frames) + ".bmp";
+            int saveResult = SOIL_save_screenshot(outputname.c_str(), SOIL_SAVE_TYPE_BMP, 0, 0, WIDTH * 2, HEIGHT * 2);
+            cout << WIDTH <<'x' << HEIGHT << endl;
+            cout << outputname <<"result: " << saveResult << endl;    
+        }
+        
         
         // Swap the screen buffers
         glfwSwapBuffers(window);
+
+        // std::vector< unsigned char> rgbdata(4*WIDTH*HEIGHT);
+        // glReadPixels(0, 0, WIDTH, HEIGHT,GL_RGBA,GL_UNSIGNED_BYTE, &rgbdata[0]);
+        // string outputname = "output/output" + format(nbFrames) + ".bmp";
+        // int saveResult = SOIL_save_image
+        // (
+        //     outputname.c_str(),
+        //     SOIL_SAVE_TYPE_BMP,
+        //     WIDTH, HEIGHT, 4,
+        //     rgbdata.data()
+        // );
+
+
     }
     
     delete shader;

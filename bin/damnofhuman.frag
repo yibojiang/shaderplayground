@@ -5,12 +5,12 @@
 
 const float cloudscale = 1.1;
 const float speed = 0.03;
-const float clouddark = 0.5;
+const float clouddark = 0.3;
 const float cloudlight = 0.3;
 const float cloudcover = 0.2;
 const float cloudalpha = 8.0;
 // const float skytint = 0.5;
-const float skytint = 0.0;
+const float skytint = 0.1;
 const vec3 skycolour1 = vec3(0.2, 0.4, 0.6);
 const vec3 skycolour2 = vec3(0.4, 0.7, 1.0);
 
@@ -82,13 +82,7 @@ float raymarch(vec3 ro, vec3 rd){
     return t;
 }
 
-vec3 getNormal(vec3 p){
-    vec2 e = vec2(PRECI, 0.0);
-    vec3 n = vec3(map(p+e.xyy) - map(p-e.xyy),
-                 map(p+e.yxy) - map(p-e.yxy),
-                 map(p+e.yyx) - map(p-e.yyx));
-    return normalize(n);
-}
+
 
 mat3 setCamera( in vec3 ro, in vec3 ta, float cr )
 {
@@ -105,8 +99,6 @@ mat3 setCamera( in vec3 ro, in vec3 ta, float cr )
 const vec3 sundir = normalize(vec3(0.0, 10.0, 2.9));
 
 vec3 shadeCloud(vec2 p, vec2 uv, vec3 bgcolor){
-    // vec2 p = fragCoord.xy / iResolution.xy;
-    // vec2 uv = p*vec2(iResolution.x/iResolution.y,1.0);    
     float time = iGlobalTime * speed;
     float q = fbm(uv * cloudscale * 0.5);
     
@@ -166,7 +158,7 @@ vec3 shadeCloud(vec2 p, vec2 uv, vec3 bgcolor){
     // return c;
     // vec3 skycolour = mix(skycolour2, skycolour1, p.y);
     vec3 skycolour = bgcolor;
-    vec3 cloudcolour = vec3(1.1, 1.1, 0.9) * clamp((clouddark + cloudlight*c), 0.0, 1.0);
+    vec3 cloudcolour = vec3(0.15, 0.15, 0.09) * clamp((clouddark + cloudlight*c), 0.0, 1.0);
    
     f = cloudcover + cloudalpha*f*r;
     vec3 result = mix(skycolour, clamp(skytint * skycolour + cloudcolour, 0.0, 1.0), clamp(f + c, 0.0, 1.0));
@@ -187,10 +179,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 rd = ca * normalize( vec3(uv.xy, 2.0) );
     rd = normalize(rd);
     
-    
     float sun = clamp( dot(sundir,rd), 0.0, 1.0 );
-    
-    
     float result = raymarch(ro, rd);
     
     float grad = smoothstep(0.0, 1.0, -uv.y );
@@ -201,7 +190,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec3 lig = vec3(1.0, -2.0, 1.0);
     lig = normalize(lig);
     vec3 hit = ro + result*rd;
-    vec3 n = getNormal(hit);
+    
 
     const float cloudscale = 1.1;
     const float speed = 0.03;
@@ -213,25 +202,21 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
         // shade moon
         float moon = smoothstep(0.0, 0.01, 0.18 - length(uv- vec2(0.0,0.4)));
         vec2 moonpos = uv - vec2(0.0,0.43);
+
+        // unregular shape
         float rad = noise11(atan(moonpos.x, moonpos.y)*7.0 + 2.0) * 0.008;
         float moonshade = smoothstep(0.0, 0.01, 0.18 + rad - length(moonpos));
         moon = moon - min(moon,moonshade);    
         color = mix(color, mix(vec3(0.0),vec3(1.0), 2.5*length(moonpos) ), moon );
+        
         // sun
-        color += 2.0*vec3(1.0,0.6,0.6)*pow( sun, 256.0 );   
+        color += 4.0*vec3(1.0,0.6,0.6)*pow(sun, 512.0 );   
+        //sun flare
+        // color += 0.3*vec3(1.0,0.6,0.6)*pow(sun, 8.0 );   
 
         vec2 p1 = fragCoord.xy / iResolution.xy;
         vec2 uv1 = p1*vec2(iResolution.x/iResolution.y,1.0); 
         color = shadeCloud(p1, uv1, color);
-
-        // vec3 skycolour = mix(skycolour2, skycolour1, p.y);
-        // vec3 skycolour = color;
-        // vec3 cloudcolour = vec3(1.1, 1.1, 0.9) * clamp((clouddark + cloudlight*cloud), 0.0, 1.0);
-        // f = cloudcover + cloudalpha*f*r;
-        // color = mix(skycolour, clamp(skytint * skycolour + cloudcolour, 0.0, 1.0), clamp(f + c, 0.0, 1.0));
-
-        // color = mix(color, vec3(0,0,0), cloud);
-        // color = vec3(cloud);
     
     }
     else{
@@ -239,7 +224,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     }
     
     
-    color += 0.3*vec3(1.0,0.4,0.2)*pow( sun, 128.0 );
+    color += 0.3*vec3(1.0,0.4,0.2)*pow( sun, 64.0 );
     
     
     fragColor = vec4(color.xyz, 1.0);

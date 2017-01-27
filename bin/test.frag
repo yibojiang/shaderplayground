@@ -130,9 +130,9 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     vec2 mo = iMouse.xy/iResolution.xy;
     // vec3 ro = vec3( 1.0*cos(0.1*time + 6.0*mo.x), 1.0 + 2.0*mo.y, 1.0*sin(0.1*time + 6.0*mo.x) );
     vec3 ro = vec3( 0.0, 0.0, -2.0 );
-    vec3 ta = vec3( 0.0, 0.2, 0.0);
+    vec3 ta = vec3( 0.0, 0.0, 0.0);
     mat3 ca = setCamera( ro, ta, 0.0 );
-    float fov = pi/3; // hotirzontal fov 60
+    float fov = pi/4; // hotirzontal fov 60
     float near = 2.0/tan(fov/2);
   	vec3 rd = ca * normalize( vec3(uv.xy,near) );
 

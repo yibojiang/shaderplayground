@@ -1,79 +1,38 @@
--rw-r--r--  1 admin  staff   3075 Dec 24 23:12 2dclouds.frag
--rw-r--r--  1 admin  staff   2153 Dec 29 17:23 Analytical_Motionblur_2D.frag
--rw-r--r--  1 admin  staff  13770 Dec 24 23:18 UEIT.frag
--rw-r--r--  1 admin  staff  11752 Dec 22 22:00 abandoned_base.frag
--rw-r--r--  1 admin  staff   3699 Dec 22 11:56 analytical_normals2d.frag
--rw-r--r--  1 admin  staff   6430 Dec 22 11:56 analytical_normals3d.frag
--rw-r--r--  1 admin  staff   4403 Dec 24 23:09 arabesque.frag
--rw-r--r--  1 admin  staff  23849 Dec 27 21:15 arlo.frag
--rw-r--r--  1 admin  staff   6022 Dec 27 21:31 basic_montecarlo.frag
--rw-r--r--  1 admin  staff  28622 Dec 22 11:56 bay_bridge.frag
--rw-r--r--  1 admin  staff  10389 Dec 22 22:33 buoy.frag
--rw-r--r--  1 admin  staff   4823 Dec 24 22:48 cloud.frag
--rw-r--r--  1 admin  staff   5839 Dec 24 22:48 cloudsphere.frag
--rw-r--r--  1 admin  staff   3817 Jan 13 00:55 damnofhuman.frag
--rw-r--r--  1 admin  staff    160 Dec 29 00:17 default.frag
--rw-r--r--  1 admin  staff  18313 Dec 25 20:58 disney_plausible_model.frag
--rw-r--r--  1 admin  staff   8443 Dec 22 11:56 elevated.frag
--rw-r--r--  1 admin  staff  16966 Dec 22 11:56 endless_passageway.frag
--rw-r--r--  1 admin  staff  13809 Dec 27 21:26 eve_arrives.frag
--rw-r--r--  1 admin  staff   3687 Dec 22 11:56 fbm.frag
--rw-r--r--  1 admin  staff  11401 Dec 25 18:18 filtering_procedurals.frag
--rw-r--r--  1 admin  staff  20012 Dec 24 23:14 firework_show.frag
--rw-r--r--  1 admin  staff   2681 Dec 24 23:15 flower.frag
--rw-r--r--  1 admin  staff  23645 Jan  8 10:26 fluxcore.frag
--rw-r--r--  1 admin  staff  17658 Dec 22 11:56 fruxis.frag
--rw-r--r--  1 admin  staff   3082 Dec 22 11:56 func.frag
--rw-r--r--  1 admin  staff   9510 Dec 24 23:12 jetstream.frag
--rw-r--r--  1 admin  staff   8165 Dec 22 21:01 lake.frag
--rw-r--r--  1 admin  staff   1552 Dec 27 21:14 mandelbrot.frag
--rw-r--r--  1 admin  staff  60140 Dec 22 11:56 mario.frag
--rw-r--r--  1 admin  staff   4061 Dec 27 21:06 menger_sponge.frag
--rw-r--r--  1 admin  staff   7668 Dec 29 17:21 metaball.frag
--rw-r--r--  1 admin  staff   3356 Jan 13 00:50 monolith.frag
--rw-r--r--  1 admin  staff   6502 Dec 22 11:56 morphing.frag
--rw-r--r--  1 admin  staff  41769 Dec 25 19:27 multiple_transparency.frag
--rw-r--r--  1 admin  staff   3419 Dec 24 23:15 myvoronoi.frag
--rw-r--r--  1 admin  staff   6758 Dec 24 22:50 naruto.frag
--rw-r--r--  1 admin  staff   5702 Dec 22 11:56 ocean.frag
--rw-r--r--  1 admin  staff  45119 Jan  8 10:26 palnet.frag
--rw-r--r--  1 admin  staff  52988 Dec 27 20:17 pi_train.frag
--rw-r--r--  1 admin  staff   7553 Jan  4 15:43 pixarball.frag
--rw-r--r--  1 admin  staff  31011 Dec 22 11:56 pixarlight.frag
--rw-r--r--  1 admin  staff  45119 Dec 22 11:56 planet.frag
--rw-r--r--  1 admin  staff   9963 Dec 27 21:22 pool.frag
--rw-r--r--  1 admin  staff   9348 Dec 22 11:56 quadraticbezier.frag
--rw-r--r--  1 admin  staff  27359 Dec 22 16:12 rainforest.frag
--rw-r--r--  1 admin  staff   5710 Dec 27 21:27 rasterizer.frag
--rw-r--r--  1 admin  staff   9837 Dec 29 22:01 raymarching.frag
--rw-r--r--  1 admin  staff   9524 Dec 27 21:29 repelling.frag
--rw-r--r--  1 admin  staff  27275 Dec 24 16:09 river.frag
--rw-r--r--  1 admin  staff    878 Dec 24 23:17 simplex.frag
--rw-r--r--  1 admin  staff   2642 Dec 24 22:49 simplexnoise.frag
--rw-r--r--  1 admin  staff   7897 Dec 25 00:18 sirenian_dawn.frag
--rw-r--r--  1 admin  staff  35161 Dec 22 11:56 skyline.frag
--rw-r--r--  1 admin  staff   6774 Dec 22 22:55 smaller_number.frag
--rw-r--r--  1 admin  staff  23529 Dec 24 22:33 snail.frag
--rw-r--r--  1 admin  staff   7821 Dec 27 21:11 space_curvature.frag
--rw-r--r--  1 admin  staff   5206 Dec 24 23:28 spark.frag
--rw-r--r--  1 admin  staff   3156 Dec 22 11:56 sponge.frag
--rw-r--r--  1 admin  staff   5028 Dec 22 11:56 storm.frag
--rw-r--r--  1 admin  staff  11135 Dec 24 23:30 terrain_test.frag
--rw-r--r--  1 admin  staff   4301 Dec 30 20:04 test.frag
--rw-r--r--  1 admin  staff    158 Dec 24 22:50 texture.frag
--rw-r--r--  1 admin  staff  18966 Dec 24 23:17 train_ride.frag
--rw-r--r--  1 admin  staff  58667 Dec 24 23:18 tutorial.frag
--rw-r--r--  1 admin  staff   5108 Dec 24 23:27 valuenoise.frag
--rw-r--r--  1 admin  staff   1463 Dec 24 23:28 valuenoise3d.frag
--rw-r--r--  1 admin  staff  12064 Dec 24 23:16 voroni.frag
--rw-r--r--  1 admin  staff   2606 Dec 24 23:16 voronoi.frag
--rw-r--r--  1 admin  staff   2383 Dec 24 23:30 voronoise.frag
--rw-r--r--  1 admin  staff   3440 Dec 29 17:13 warping.frag
--rw-r--r--  1 admin  staff   1538 Dec 24 22:47 water.frag
--rw-r--r--  1 admin  staff   1492 Dec 24 23:27 water_caustic.frag
--rw-r--r--  1 admin  staff  10098 Dec 24 23:22 water_world.frag
--rw-r--r--  1 admin  staff  10558 Dec 22 11:56 whether.frag
--rw-r--r--  1 admin  staff  17398 Dec 27 21:02 woods.frag
--rw-r--r--  1 admin  staff   4245 Dec 28 08:35 worm.frag
+argc = 4
+argv[0] = ./playground
+argv[1] = /Users/admin/Documents/Programming/shaderplayground/bin/Physically-based_sdf.frag
+argv[2] = 800
+argv[3] = 480
+Size:800, 480
+compile shader /Users/admin/Documents/Programming/shaderplayground/bin/Physically-based_sdf.frag
+Starting GLFW context, OpenGL 3.3
+tex01.jpg is loaded
+tex02.jpg is loaded
+tex03.jpg is loaded
+tex04.jpg is loaded
+tex05.png is loaded
+tex06.jpg is loaded
+tex07.jpg is loaded
+tex08.jpg is loaded
+tex09.jpg is loaded
+tex10.png is loaded
+tex11.png is loaded
+tex12.png is loaded
+tex13.png is null
+tex14.png is loaded
+tex15.png is loaded
+tex16.png is loaded
+tex17.jpg is loaded
+tex18.jpg is loaded
+tex19.png is loaded
+tex20.jpg is loaded
+tex21.png is loaded
+opening
+17.5439 ms/frame
+0, 1, 0
+215.27, 390.465
+0, 0, 0
+215.27, 391.465
+16.6667 ms/frame
 
-[Finished in 0.0s]
+[Finished in 3.3s]
