@@ -385,7 +385,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
   vec2 moonPos = uv - vec2(.568, .29);
   //bg stars
-  col.xyz += mix(vec3(0.) , sign ( vec3( clamp(rand(uv) - 0.9985, 0., 1. ) ) ) ,   clamp (sign (dot(moonPos, moonPos) - 0.05), 0., 1. ) );
+  col.xyz += mix(vec3(0.) , sign ( vec3( clamp(rand(uv) - 0.9995, 0., 1. ) ) ) ,   clamp (sign (dot(moonPos, moonPos) - 0.05), 0., 1. ) );
 
   vec3 moonCol = vec3(0.45, 0.3, 0.3);
   col = mix (moonCol, col, drawMoon(moonPos ) );

@@ -368,7 +368,10 @@ int main(int argc, char** argv)
 
         GLfloat timeValue = glfwGetTime();
         GLuint fragTimeLocation = glGetUniformLocation(shader->shaderProgram, "iGlobalTime");
-        glUniform1f(fragTimeLocation, timeValue);
+        // glUniform1f(fragTimeLocation, timeValue);
+        // float fixInterval = 0.016f;
+        float fixInterval = 0.0428f;
+        glUniform1f(fragTimeLocation, frames * fixInterval);
         
         GLuint fragResLocation = glGetUniformLocation(shader->shaderProgram, "iResolution");
         glUniform2f(fragResLocation, WIDTH, HEIGHT);
