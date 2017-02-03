@@ -13,7 +13,7 @@ Build with Cmake
 
 Usage:
 
--save your shader with *.frag
--run ./playground foo.frag WIDTH HEIGHT
--"return" to refresh the shader
--"s" to render it into /bin/output/
+- save your shader with *.frag
+- run ./playground foo.frag WIDTH HEIGHT
+- "return" to refresh the shader
+- "s" to render it into /bin/output/
