@@ -1,10 +1,10 @@
 argc = 4
 argv[0] = ./playground
-argv[1] = /Users/admin/Documents/Programming/shaderplayground/bin/Physically-based_sdf.frag
+argv[1] = /Users/admin/Documents/Projects/shaderplayground/bin/pixarball.frag
 argv[2] = 800
 argv[3] = 480
 Size:800, 480
-compile shader /Users/admin/Documents/Programming/shaderplayground/bin/Physically-based_sdf.frag
+compile shader /Users/admin/Documents/Projects/shaderplayground/bin/pixarball.frag
 Starting GLFW context, OpenGL 3.3
 tex01.jpg is loaded
 tex02.jpg is loaded
@@ -28,11 +28,609 @@ tex19.png is loaded
 tex20.jpg is loaded
 tex21.png is loaded
 opening
-17.5439 ms/frame
-0, 1, 0
-215.27, 390.465
-0, 0, 0
-215.27, 391.465
+18.8679 ms/frame
 16.6667 ms/frame
+16.6667 ms/frame
+800x480
+output/output0178.bmpresult: 1
+800x480
+output/output0179.bmpresult: 1
+800x480
+output/output0180.bmpresult: 1
+800x480
+output/output0181.bmpresult: 1
+111.111 ms/frame
+800x480
+output/output0182.bmpresult: 1
+800x480
+output/output0183.bmpresult: 1
+800x480
+output/output0184.bmpresult: 1
+800x480
+output/output0185.bmpresult: 1
+250 ms/frame
+800x480
+output/output0186.bmpresult: 1
+800x480
+output/output0187.bmpresult: 1
+800x480
+output/output0188.bmpresult: 1
+800x480
+output/output0189.bmpresult: 1
+250 ms/frame
+800x480
+output/output0190.bmpresult: 1
+800x480
+output/output0191.bmpresult: 1
+800x480
+output/output0192.bmpresult: 1
+800x480
+output/output0193.bmpresult: 1
+250 ms/frame
+800x480
+output/output0194.bmpresult: 1
+800x480
+output/output0195.bmpresult: 1
+800x480
+output/output0196.bmpresult: 1
+800x480
+output/output0197.bmpresult: 1
+250 ms/frame
+800x480
+output/output0198.bmpresult: 1
+800x480
+output/output0199.bmpresult: 1
+800x480
+output/output0200.bmpresult: 1
+800x480
+output/output0201.bmpresult: 1
+250 ms/frame
+800x480
+output/output0202.bmpresult: 1
+800x480
+output/output0203.bmpresult: 1
+800x480
+output/output0204.bmpresult: 1
+800x480
+output/output0205.bmpresult: 1
+250 ms/frame
+800x480
+output/output0206.bmpresult: 1
+800x480
+output/output0207.bmpresult: 1
+800x480
+output/output0208.bmpresult: 1
+800x480
+output/output0209.bmpresult: 1
+250 ms/frame
+800x480
+output/output0210.bmpresult: 1
+800x480
+output/output0211.bmpresult: 1
+800x480
+output/output0212.bmpresult: 1
+800x480
+output/output0213.bmpresult: 1
+250 ms/frame
+800x480
+output/output0214.bmpresult: 1
+800x480
+output/output0215.bmpresult: 1
+800x480
+output/output0216.bmpresult: 1
+800x480
+output/output0217.bmpresult: 1
+250 ms/frame
+800x480
+output/output0218.bmpresult: 1
+800x480
+output/output0219.bmpresult: 1
+800x480
+output/output0220.bmpresult: 1
+800x480
+output/output0221.bmpresult: 1
+250 ms/frame
+800x480
+output/output0222.bmpresult: 1
+800x480
+output/output0223.bmpresult: 1
+800x480
+output/output0224.bmpresult: 1
+800x480
+output/output0225.bmpresult: 1
+250 ms/frame
+800x480
+output/output0226.bmpresult: 1
+800x480
+output/output0227.bmpresult: 1
+800x480
+output/output0228.bmpresult: 1
+800x480
+output/output0229.bmpresult: 1
+250 ms/frame
+800x480
+output/output0230.bmpresult: 1
+800x480
+output/output0231.bmpresult: 1
+800x480
+output/output0232.bmpresult: 1
+800x480
+output/output0233.bmpresult: 1
+250 ms/frame
+800x480
+output/output0234.bmpresult: 1
+800x480
+output/output0235.bmpresult: 1
+800x480
+output/output0236.bmpresult: 1
+800x480
+output/output0237.bmpresult: 1
+250 ms/frame
+800x480
+output/output0238.bmpresult: 1
+800x480
+output/output0239.bmpresult: 1
+800x480
+output/output0240.bmpresult: 1
+333.333 ms/frame
+800x480
+output/output0241.bmpresult: 1
+800x480
+output/output0242.bmpresult: 1
+800x480
+output/output0243.bmpresult: 1
+800x480
+output/output0244.bmpresult: 1
+250 ms/frame
+800x480
+output/output0245.bmpresult: 1
+800x480
+output/output0246.bmpresult: 1
+800x480
+output/output0247.bmpresult: 1
+800x480
+output/output0248.bmpresult: 1
+250 ms/frame
+800x480
+output/output0249.bmpresult: 1
+800x480
+output/output0250.bmpresult: 1
+800x480
+output/output0251.bmpresult: 1
+800x480
+output/output0252.bmpresult: 1
+250 ms/frame
+800x480
+output/output0253.bmpresult: 1
+800x480
+output/output0254.bmpresult: 1
+800x480
+output/output0255.bmpresult: 1
+800x480
+output/output0256.bmpresult: 1
+250 ms/frame
+800x480
+output/output0257.bmpresult: 1
+800x480
+output/output0258.bmpresult: 1
+800x480
+output/output0259.bmpresult: 1
+800x480
+output/output0260.bmpresult: 1
+250 ms/frame
+800x480
+output/output0261.bmpresult: 1
+800x480
+output/output0262.bmpresult: 1
+800x480
+output/output0263.bmpresult: 1
+800x480
+output/output0264.bmpresult: 1
+250 ms/frame
+800x480
+output/output0265.bmpresult: 1
+800x480
+output/output0266.bmpresult: 1
+800x480
+output/output0267.bmpresult: 1
+800x480
+output/output0268.bmpresult: 1
+250 ms/frame
+800x480
+output/output0269.bmpresult: 1
+800x480
+output/output0270.bmpresult: 1
+800x480
+output/output0271.bmpresult: 1
+800x480
+output/output0272.bmpresult: 1
+250 ms/frame
+800x480
+output/output0273.bmpresult: 1
+800x480
+output/output0274.bmpresult: 1
+800x480
+output/output0275.bmpresult: 1
+800x480
+output/output0276.bmpresult: 1
+250 ms/frame
+800x480
+output/output0277.bmpresult: 1
+800x480
+output/output0278.bmpresult: 1
+800x480
+output/output0279.bmpresult: 1
+800x480
+output/output0280.bmpresult: 1
+250 ms/frame
+800x480
+output/output0281.bmpresult: 1
+800x480
+output/output0282.bmpresult: 1
+800x480
+output/output0283.bmpresult: 1
+800x480
+output/output0284.bmpresult: 1
+250 ms/frame
+800x480
+output/output0285.bmpresult: 1
+800x480
+output/output0286.bmpresult: 1
+800x480
+output/output0287.bmpresult: 1
+800x480
+output/output0288.bmpresult: 1
+250 ms/frame
+800x480
+output/output0289.bmpresult: 1
+800x480
+output/output0290.bmpresult: 1
+800x480
+output/output0291.bmpresult: 1
+800x480
+output/output0292.bmpresult: 1
+250 ms/frame
+800x480
+output/output0293.bmpresult: 1
+800x480
+output/output0294.bmpresult: 1
+800x480
+output/output0295.bmpresult: 1
+800x480
+output/output0296.bmpresult: 1
+250 ms/frame
+800x480
+output/output0297.bmpresult: 1
+800x480
+output/output0298.bmpresult: 1
+800x480
+output/output0299.bmpresult: 1
+800x480
+output/output0300.bmpresult: 1
+250 ms/frame
+800x480
+output/output0301.bmpresult: 1
+800x480
+output/output0302.bmpresult: 1
+800x480
+output/output0303.bmpresult: 1
+333.333 ms/frame
+800x480
+output/output0304.bmpresult: 1
+800x480
+output/output0305.bmpresult: 1
+800x480
+output/output0306.bmpresult: 1
+800x480
+output/output0307.bmpresult: 1
+250 ms/frame
+800x480
+output/output0308.bmpresult: 1
+800x480
+output/output0309.bmpresult: 1
+800x480
+output/output0310.bmpresult: 1
+800x480
+output/output0311.bmpresult: 1
+250 ms/frame
+800x480
+output/output0312.bmpresult: 1
+800x480
+output/output0313.bmpresult: 1
+800x480
+output/output0314.bmpresult: 1
+800x480
+output/output0315.bmpresult: 1
+250 ms/frame
+800x480
+output/output0316.bmpresult: 1
+800x480
+output/output0317.bmpresult: 1
+800x480
+output/output0318.bmpresult: 1
+800x480
+output/output0319.bmpresult: 1
+250 ms/frame
+800x480
+output/output0320.bmpresult: 1
+800x480
+output/output0321.bmpresult: 1
+800x480
+output/output0322.bmpresult: 1
+800x480
+output/output0323.bmpresult: 1
+250 ms/frame
+800x480
+output/output0324.bmpresult: 1
+800x480
+output/output0325.bmpresult: 1
+800x480
+output/output0326.bmpresult: 1
+800x480
+output/output0327.bmpresult: 1
+250 ms/frame
+800x480
+output/output0328.bmpresult: 1
+800x480
+output/output0329.bmpresult: 1
+800x480
+output/output0330.bmpresult: 1
+800x480
+output/output0331.bmpresult: 1
+250 ms/frame
+800x480
+output/output0332.bmpresult: 1
+800x480
+output/output0333.bmpresult: 1
+800x480
+output/output0334.bmpresult: 1
+800x480
+output/output0335.bmpresult: 1
+250 ms/frame
+800x480
+output/output0336.bmpresult: 1
+800x480
+output/output0337.bmpresult: 1
+800x480
+output/output0338.bmpresult: 1
+800x480
+output/output0339.bmpresult: 1
+250 ms/frame
+800x480
+output/output0340.bmpresult: 1
+800x480
+output/output0341.bmpresult: 1
+800x480
+output/output0342.bmpresult: 1
+800x480
+output/output0343.bmpresult: 1
+250 ms/frame
+800x480
+output/output0344.bmpresult: 1
+800x480
+output/output0345.bmpresult: 1
+800x480
+output/output0346.bmpresult: 1
+800x480
+output/output0347.bmpresult: 1
+250 ms/frame
+800x480
+output/output0348.bmpresult: 1
+800x480
+output/output0349.bmpresult: 1
+800x480
+output/output0350.bmpresult: 1
+800x480
+output/output0351.bmpresult: 1
+250 ms/frame
+800x480
+output/output0352.bmpresult: 1
+800x480
+output/output0353.bmpresult: 1
+800x480
+output/output0354.bmpresult: 1
+800x480
+output/output0355.bmpresult: 1
+250 ms/frame
+800x480
+output/output0356.bmpresult: 1
+800x480
+output/output0357.bmpresult: 1
+800x480
+output/output0358.bmpresult: 1
+800x480
+output/output0359.bmpresult: 1
+250 ms/frame
+800x480
+output/output0360.bmpresult: 1
+800x480
+output/output0361.bmpresult: 1
+800x480
+output/output0362.bmpresult: 1
+800x480
+output/output0363.bmpresult: 1
+250 ms/frame
+800x480
+output/output0364.bmpresult: 1
+800x480
+output/output0365.bmpresult: 1
+800x480
+output/output0366.bmpresult: 1
+800x480
+output/output0367.bmpresult: 1
+250 ms/frame
+800x480
+output/output0368.bmpresult: 1
+800x480
+output/output0369.bmpresult: 1
+800x480
+output/output0370.bmpresult: 1
+800x480
+output/output0371.bmpresult: 1
+250 ms/frame
+800x480
+output/output0372.bmpresult: 1
+800x480
+output/output0373.bmpresult: 1
+800x480
+output/output0374.bmpresult: 1
+800x480
+output/output0375.bmpresult: 1
+250 ms/frame
+800x480
+output/output0376.bmpresult: 1
+800x480
+output/output0377.bmpresult: 1
+800x480
+output/output0378.bmpresult: 1
+800x480
+output/output0379.bmpresult: 1
+250 ms/frame
+800x480
+output/output0380.bmpresult: 1
+800x480
+output/output0381.bmpresult: 1
+800x480
+output/output0382.bmpresult: 1
+800x480
+output/output0383.bmpresult: 1
+250 ms/frame
+800x480
+output/output0384.bmpresult: 1
+800x480
+output/output0385.bmpresult: 1
+800x480
+output/output0386.bmpresult: 1
+333.333 ms/frame
+800x480
+output/output0387.bmpresult: 1
+800x480
+output/output0388.bmpresult: 1
+800x480
+output/output0389.bmpresult: 1
+800x480
+output/output0390.bmpresult: 1
+250 ms/frame
+800x480
+output/output0391.bmpresult: 1
+800x480
+output/output0392.bmpresult: 1
+800x480
+output/output0393.bmpresult: 1
+800x480
+output/output0394.bmpresult: 1
+250 ms/frame
+800x480
+output/output0395.bmpresult: 1
+800x480
+output/output0396.bmpresult: 1
+800x480
+output/output0397.bmpresult: 1
+800x480
+output/output0398.bmpresult: 1
+250 ms/frame
+800x480
+output/output0399.bmpresult: 1
+800x480
+output/output0400.bmpresult: 1
+800x480
+output/output0401.bmpresult: 1
+800x480
+output/output0402.bmpresult: 1
+250 ms/frame
+800x480
+output/output0403.bmpresult: 1
+800x480
+output/output0404.bmpresult: 1
+800x480
+output/output0405.bmpresult: 1
+800x480
+output/output0406.bmpresult: 1
+250 ms/frame
+800x480
+output/output0407.bmpresult: 1
+800x480
+output/output0408.bmpresult: 1
+800x480
+output/output0409.bmpresult: 1
+800x480
+output/output0410.bmpresult: 1
+250 ms/frame
+800x480
+output/output0411.bmpresult: 1
+800x480
+output/output0412.bmpresult: 1
+800x480
+output/output0413.bmpresult: 1
+800x480
+output/output0414.bmpresult: 1
+250 ms/frame
+800x480
+output/output0415.bmpresult: 1
+800x480
+output/output0416.bmpresult: 1
+800x480
+output/output0417.bmpresult: 1
+800x480
+output/output0418.bmpresult: 1
+250 ms/frame
+800x480
+output/output0419.bmpresult: 1
+800x480
+output/output0420.bmpresult: 1
+800x480
+output/output0421.bmpresult: 1
+800x480
+output/output0422.bmpresult: 1
+250 ms/frame
+800x480
+output/output0423.bmpresult: 1
+800x480
+output/output0424.bmpresult: 1
+800x480
+output/output0425.bmpresult: 1
+800x480
+output/output0426.bmpresult: 1
+250 ms/frame
+800x480
+output/output0427.bmpresult: 1
+800x480
+output/output0428.bmpresult: 1
+800x480
+output/output0429.bmpresult: 1
+800x480
+output/output0430.bmpresult: 1
+250 ms/frame
+800x480
+output/output0431.bmpresult: 1
+800x480
+output/output0432.bmpresult: 1
+800x480
+output/output0433.bmpresult: 1
+800x480
+output/output0434.bmpresult: 1
+250 ms/frame
+800x480
+output/output0435.bmpresult: 1
+800x480
+output/output0436.bmpresult: 1
+800x480
+output/output0437.bmpresult: 1
+800x480
+output/output0438.bmpresult: 1
+250 ms/frame
+800x480
+output/output0439.bmpresult: 1
+800x480
+output/output0440.bmpresult: 1
+800x480
+output/output0441.bmpresult: 1
+800x480
+output/output0442.bmpresult: 1
+250 ms/frame
+800x480
+output/output0443.bmpresult: 1
+800x480
+output/output0444.bmpresult: 1
 
-[Finished in 3.3s]
+[Finished in 71.8s]

@@ -273,7 +273,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
 
     //dif = 1.0;
     //sh = 1.0;
-
+    
     vec3 diffCol = difftex * dif * sh;
     vec3 specCol = sepctex * pow( max( 0.0, dot( rd, reflect( -ld, n ) ) ), 110.0 );
     color = diffCol + specCol + ambi;

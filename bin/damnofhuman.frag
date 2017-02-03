@@ -14,6 +14,7 @@ const float skytint = 0.1;
 const vec3 skycolour1 = vec3(0.2, 0.4, 0.6);
 const vec3 skycolour2 = vec3(0.4, 0.7, 1.0);
 
+// rotate and scale matrix
 const mat2 m = mat2( 1.6,  1.2, -1.2,  1.6 );
 
 float hash11( float n )
@@ -33,6 +34,7 @@ float noise11( float x ){
     return mix(hash11(p), hash11(p + 1.0), f);
 }
 
+// Simplex Noise
 float noise( in vec2 p ) {
     const float K1 = 0.366025404; // (sqrt(3)-1)/2;
     const float K2 = 0.211324865; // (3-sqrt(3))/6;
@@ -159,6 +161,9 @@ vec3 shadeCloud(vec2 p, vec2 uv, vec3 bgcolor){
     // vec3 skycolour = mix(skycolour2, skycolour1, p.y);
     vec3 skycolour = bgcolor;
     vec3 cloudcolour = vec3(0.15, 0.15, 0.09) * clamp((clouddark + cloudlight*c), 0.0, 1.0);
+
+    // float distToSun = length(p - sundir);
+    cloudcolour = mix(vec3(1), distToSun);
    
     f = cloudcover + cloudalpha*f*r;
     vec3 result = mix(skycolour, clamp(skytint * skycolour + cloudcolour, 0.0, 1.0), clamp(f + c, 0.0, 1.0));

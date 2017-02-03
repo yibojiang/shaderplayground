@@ -12,7 +12,7 @@
 
 // http://www.iquilezles.org/www/articles/voronoilines/voronoilines.htm
 
-#define ANIMATE
+// #define ANIMATE
 
 vec2 hash2( vec2 p )
 {

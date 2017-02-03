@@ -149,7 +149,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord){
 	vec3 color = vec3(1.0);
 	
 	
-	vec2 p = (uv- vec2(-0.9, 0.5) ) * 80.0 * (0.5 + 0.5 * sin(iGlobalTime * 0.1 ) );
+	// vec2 p = (uv- vec2(-0.9, 0.5) ) * 80.0 * (0.5 + 0.5 * sin(iGlobalTime * 0.1 ) );
+	vec2 p = uv * 4;
 	// color = vec3(vnoise(p * 80.0));
 	// float border = getBorder(p);
 	float border = vnoise2(p);

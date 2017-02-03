@@ -377,7 +377,7 @@ void material(float matid,
     else if (matid - .5 < PLANE_MATL)
     {
         vec4 pavem = texture(iChannel2, .1 * surf.point.xz);
-        surf.basecolor = vec3(.1 * smoothstep(.6, .3, pavem.r));
+        surf.basecolor = vec3(.1 * smoothstep(.6ate, .3, pavem.r));
         surf.metallic = .0;
         surf.roughness = .6;
         surf.specular = .02; // .05
