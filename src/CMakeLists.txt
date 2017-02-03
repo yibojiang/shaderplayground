@@ -1,15 +1,7 @@
 
 
-# Add executable called "helloDemo" that is built from the source files
-# "demo.cxx" and "demo_b.cxx". The extensions are automatically found.
-# LINK_DIRECTORIES(.)
+
 add_executable(playground main.cpp)
-
-# Link the executable to the Hello library. Since the Hello library has
-# public include directories we will use those link directories when building
-# helloDemo
-# target_link_libraries (helloDemo LINK_PUBLIC Hello)
-
 add_library(shader shader.cpp)
 
 
@@ -36,16 +28,3 @@ add_custom_command(TARGET playground POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
                        ${CMAKE_SOURCE_DIR}/build/src/playground ${CMAKE_SOURCE_DIR}/bin/playground)
 
-# This runs the executable "main" each time after it has been (re)built
-# from within the working directory "/bin" - adapt for non-*nices.
-# ADD_CUSTOM_COMMAND(TARGET playground
-#     POST_BUILD
-#     COMMAND playground
-#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
-
-
-
-
-# file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/playground
-#         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/../playground)
-# install(TARGETS playground DESTINATION bin)
