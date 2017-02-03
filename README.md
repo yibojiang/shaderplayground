@@ -3,6 +3,7 @@
 A desktop version of Shadertoy.
 
 Compile:
+
 Build with Cmake
 ```
     mkdir build/
@@ -11,6 +12,7 @@ Build with Cmake
 ```
 
 Usage:
+
 -save your shader with *.frag
 -run ./playground foo.frag WIDTH HEIGHT
 -"return" to refresh the shader
